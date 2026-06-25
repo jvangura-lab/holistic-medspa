@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PLACEHOLDER — REPLACE WITH REAL LOGO BEFORE CLIENT SHIP. Per Phase 4 owner decision 2026-06-24. -->
+<!--
+  Hand-authored wordmark placeholder for Holistic Medspa (holistic-v6).
+  Typography only — no mark, no symbol, no decorative geometry.
+  Locked fonts: Roboto Slab (display) + Source Sans 3 (body) — both loaded by site CSS.
+  Locked palette only:
+    #1B3311 deep forest green — wordmark ink
+    #623B02 chestnut brown — tagline
+    #A17D0C goldenrod — hairline rule (single, restrained)
+    cream/transparent canvas
+  Intent: hold the logo position cleanly until a real designer is commissioned.
+  No flourishes, no fake heritage, no AI-mark-like geometry.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 600 200"
+     width="600" height="200"
+     role="img"
+     aria-label="Holistic Medspa">
+  <title>Holistic Medspa (placeholder wordmark)</title>
+  <desc>Hand-authored typography placeholder. Roboto Slab wordmark in deep forest green over a single goldenrod hairline rule with a tracked chestnut tagline. To be replaced by a designer-commissioned logo before client ship.</desc>
+
+  <!-- Wordmark: "Holistic Medspa" in Roboto Slab 600 weight, deep forest green -->
+  <text x="300" y="100"
+        text-anchor="middle"
+        font-family="'Roboto Slab', 'Roboto Slab Fallback', Georgia, serif"
+        font-weight="600"
+        font-size="56"
+        letter-spacing="0.5"
+        fill="#1B3311">Holistic Medspa</text>
+
+  <!-- Single goldenrod hairline rule, restrained, centered under wordmark -->
+  <line x1="220" y1="128" x2="380" y2="128"
+        stroke="#A17D0C"
+        stroke-width="1"
+        stroke-linecap="square" />
+
+  <!-- Tracked tagline in Source Sans 3 600 caps, chestnut -->
+  <text x="300" y="156"
+        text-anchor="middle"
+        font-family="'Source Sans 3', 'Source Sans 3 Fallback', Helvetica, Arial, sans-serif"
+        font-weight="600"
+        font-size="13"
+        letter-spacing="4.2"
+        fill="#623B02">MIND &#183; BODY &#183; SOUL</text>
+</svg>

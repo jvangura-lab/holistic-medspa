@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PLACEHOLDER — REPLACE WITH REAL LOGO BEFORE CLIENT SHIP. Per Phase 4 owner decision 2026-06-24. -->
+<!--
+  Hand-authored favicon placeholder for Holistic Medspa (holistic-v6).
+  Single-letter "H" monogram in Roboto Slab Bold.
+  Locked palette only:
+    #1B3311 deep forest green — letterform
+    #F5EFE4 cream — canvas
+    #A17D0C goldenrod — single hairline rule beneath the letter (restrained)
+  Designed to remain readable at 16x16 (browser-tab favicon size).
+  Replace with real designer-commissioned mark before client ship.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 64 64"
+     width="64" height="64"
+     role="img"
+     aria-label="Holistic Medspa (H monogram, placeholder)">
+  <title>H (placeholder favicon)</title>
+  <desc>Hand-authored single-letter monogram. Roboto Slab Bold "H" in deep forest green on a cream square with a single goldenrod hairline. Placeholder until the real logo is commissioned.</desc>
+
+  <!-- Cream canvas -->
+  <rect x="0" y="0" width="64" height="64" fill="#F5EFE4" />
+
+  <!-- "H" monogram, Roboto Slab Bold, deep forest -->
+  <text x="32" y="44"
+        text-anchor="middle"
+        font-family="'Roboto Slab', 'Roboto Slab Fallback', Georgia, serif"
+        font-weight="700"
+        font-size="46"
+        letter-spacing="0"
+        fill="#1B3311">H</text>
+
+  <!-- Single goldenrod hairline beneath the letter -->
+  <line x1="22" y1="52" x2="42" y2="52"
+        stroke="#A17D0C"
+        stroke-width="1.2"
+        stroke-linecap="square" />
+</svg>

@@ -1,0 +1,230 @@
+/* ============================================================
+ * holistic-v6 — Tailwind v4 CSS-first config
+ * All design tokens hard-coded from DESIGN_SYSTEM.md §2
+ * Figma source: HDmFcabHIOznMgcauMYLP9 / nodeId 511:3
+ * ============================================================ */
+
+/* Clash Display Variable — Fontshare CDN (free, Manrope/Spectral/Istok/Archivo via next/font) */
+@import url("https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap");
+
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------
+ * Theme tokens (Tailwind v4 @theme directive — replaces tailwind.config.ts)
+ * Every value below cites its DESIGN_SYSTEM.md §2 source.
+ * ---------------------------------------------------------------- */
+@theme {
+  /* PALETTE (DESIGN_SYSTEM.md §2.1 — 10 hexes, all Figma-cited) */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-overlay: #0e0f14;          /* Become-a-Member tile dark overlay 80% */
+  --color-ink-deep: #151515;         /* package_card_ink (H3 + price + checklist); footer ready-CTA H1 */
+  --color-ink-h2: #231f20;           /* section_h2_ink (Spectral 80px) + $/Session suffix + Newsletter dark panel */
+  --color-ink-body: #242424;         /* primary_body_ink (Manrope + Clash body + form labels + footer outline border) */
+  --color-brown: #443c38;            /* warm_brown_band_bg (Services pill card) */
+  --color-mint: #7db88a;             /* primary_brand_green (header CTA, hero outline CTA, schedule submit, etc.) */
+  --color-rose: #c08181;             /* accent_dusty_rose (hero portrait ellipse 10px border) */
+  --color-cream: #f6f6f6;            /* form_field_bg (Schedule-a-Session input chambers) */
+
+  /* FONT FAMILIES (DESIGN_SYSTEM.md §2.2 — 5 families) */
+  --font-spectral: var(--font-spectral), Spectral, "Times New Roman", serif;
+  --font-manrope: var(--font-manrope), Manrope, ui-sans-serif, sans-serif;
+  --font-istok: var(--font-istok-web), "Istok Web", ui-sans-serif, sans-serif;
+  --font-archivo: var(--font-archivo), Archivo, ui-sans-serif, sans-serif;
+  --font-clash: "Clash Display Variable", "Clash Display", ui-sans-serif, sans-serif;
+
+  /* TYPE SCALE (DESIGN_SYSTEM.md §2.2 — exact Figma sizes + line-heights + tracking) */
+  --text-display-120: 120px;
+  --text-display-120--line-height: 130px;
+  --text-display-120--letter-spacing: -6px;
+
+  --text-display-120c: 120px;        /* "Stay Connected" centered variant (-4.8 tracking) */
+  --text-display-120c--line-height: 1;
+  --text-display-120c--letter-spacing: -4.8px;
+
+  --text-display-80: 80px;           /* section H2 (page H2 / footer ready-CTA) */
+  --text-display-80--line-height: 80px;
+  --text-display-80--letter-spacing: -3.2px;
+
+  --text-display-80f: 80px;          /* footer ready-CTA variant (-4 tracking) */
+  --text-display-80f--line-height: 80px;
+  --text-display-80f--letter-spacing: -4px;
+
+  --text-testimonial-40: 40px;
+  --text-testimonial-40--line-height: 45px;
+  --text-testimonial-40--letter-spacing: 2px;
+
+  --text-tile-31: 31px;              /* Clash Display 31px tile labels (Gift Card / Newsletter / Become a Member) */
+  --text-tile-31--line-height: 1.2;
+  --text-tile-31--letter-spacing: 0;
+
+  --text-price-80: 80px;             /* Manrope 80px price amount */
+  --text-price-80--line-height: 1.15;
+  --text-price-80--letter-spacing: -1.6px;
+
+  --text-price-26: 25.8px;           /* Manrope 25.8px price $ glyph */
+  --text-price-26--line-height: 1.15;
+
+  --text-price-22: 22px;             /* Manrope 22px /Session suffix */
+  --text-price-22--line-height: 1.15;
+
+  --text-card-24: 24px;              /* Clash Display 24px service-card title */
+  --text-card-24--line-height: 1.2;
+  --text-card-24--letter-spacing: 1.2px;
+
+  --text-hero-24: 24px;              /* Manrope 24px hero sub-copy */
+  --text-hero-24--line-height: 28px;
+  --text-hero-24--letter-spacing: -0.48px;
+
+  --text-cta-20: 20px;               /* Clash Display 20px CTAs / "Enter Your Email ID" */
+  --text-cta-20--line-height: 1.2;
+  --text-cta-20--letter-spacing: 1px;
+
+  --text-check-18: 18px;             /* Manrope 18px package checklist + Clash 18px footer links */
+  --text-check-18--line-height: 1.15;
+  --text-check-18--letter-spacing: -0.36px;
+
+  --text-footer-18: 18px;            /* Clash Display 18px footer link cols (40px leading uppercase) */
+  --text-footer-18--line-height: 40px;
+  --text-footer-18--letter-spacing: 0.9px;
+
+  --text-label-16: 16px;             /* Manrope 16px form labels + Clash 16px nav uppercase */
+  --text-label-16--line-height: 1.2;
+  --text-label-16--letter-spacing: 0.8px;
+
+  --text-read-14: 14px;              /* Manrope 14px service-card "Read More" + Clash 14px copyright */
+  --text-read-14--line-height: 1.2;
+  --text-read-14--letter-spacing: 0.7px;
+
+  /* RADII (DESIGN_SYSTEM.md §2.4) */
+  --radius-pill: 50px;               /* every CTA pill + every section pill band */
+  --radius-ellipse: 306.5px;         /* hero portrait ellipse 559×335 */
+  --radius-circle: 364px;            /* Stay-Connected leading portrait 728×716 */
+
+  /* CONTAINER + SPACING (DESIGN_SYSTEM.md §2.3) */
+  --container-1300: 1300px;          /* primary content container */
+  --container-1600: 1600px;          /* full-bleed page */
+
+  /* SHADOWS — NONE per DESIGN_SYSTEM.md §2.5 (flat fills only) */
+
+  /* BREAKPOINTS — desktop-only source; mobile is DS extension judgment (§7) */
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1300px;
+}
+
+/* ----------------------------------------------------------------
+ * Base reset + zero-CLS guards
+ * ---------------------------------------------------------------- */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100svh;
+    background: var(--color-white);
+    color: var(--color-ink-body);
+    font-family: var(--font-manrope);
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  img,
+  picture,
+  video,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* zero-CLS image dimension guard (DESIGN_SYSTEM.md §7 best-practice) */
+  img:not([width]):not([height]) {
+    aspect-ratio: attr(width number) / attr(height number);
+  }
+
+  /* focus ring honoring brand-mint */
+  :focus-visible {
+    outline: 2px solid var(--color-mint);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+/* ----------------------------------------------------------------
+ * Reduced-motion (DESIGN_SYSTEM.md §7 motion rule)
+ * ---------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ----------------------------------------------------------------
+ * Sticky-stacking pill cards mechanism (DESIGN_SYSTEM.md §7 signature)
+ * The Wellness-SPA Figma source's verbatim `sticky top-0` behavior.
+ * F3 sections will use .sticky-band on each of 3 pill bands.
+ * ---------------------------------------------------------------- */
+@layer components {
+  .sticky-band {
+    position: sticky;
+    top: 0;
+    border-radius: var(--radius-pill);
+  }
+
+  .container-1300 {
+    width: 100%;
+    max-width: var(--container-1300);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  /* Brand-mark loader (NOT a generic spinner) — fade in 600ms per §7 */
+  .brand-loader {
+    animation: brand-fade-in 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* Section enter — 250ms settle per §7 motion target */
+  .section-enter {
+    animation: section-enter 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes brand-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes section-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
