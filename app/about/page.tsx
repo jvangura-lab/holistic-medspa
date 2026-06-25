@@ -7,6 +7,9 @@ import Testimonial from "@/components/sections/Testimonial";
 import ReadyToBook from "@/components/sections/ReadyToBook";
 import Footer from "@/components/sections/Footer";
 import StickyMobileBar from "@/components/sections/StickyMobileBar";
+import OvalCard from "@/components/ui/OvalCard";
+import PillBandQuote from "@/components/ui/PillBandQuote";
+import Reveal from "@/components/motion/Reveal";
 
 /**
  * /about — About / Our Story
@@ -131,6 +134,29 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
+          {/* Oval-portrait DS pattern — philosophy image in ellipse for visual rhythm */}
+          <Reveal variant="mask" duration={1000} className="mx-auto mt-16 md:mt-20 px-5 md:px-0">
+            <OvalCard
+              src="/media/philosophy.jpg"
+              alt="A quiet corner of the practice on Bayou Lafourche."
+              width={720}
+              height={420}
+              className="mx-auto"
+              caption="The practice in 2020, near the Galliano Food Store storefront."
+            />
+          </Reveal>
+        </section>
+
+        {/* PillBandQuote — design-system image-band quote between 2020 and 2025 sections */}
+        <section aria-label="Practice quote" className="w-full bg-white py-16 md:py-20">
+          <PillBandQuote
+            src="/media/storefront.jpg"
+            alt="The brown brick storefront at 16148 W Main St, Cut Off, Louisiana."
+            quote="A new business practicing naturopathic medicine, with the intent to heal &amp; restore Humanity, Mind, Body &amp; Soul."
+            attribution="Holistic Medspa — Grand Opening, November 2020"
+            scrimOpacity={0.6}
+            minHeight={340}
+          />
         </section>
 
         {/* The 2025 transition — dark band */}
@@ -195,24 +221,19 @@ export default function AboutPage() {
           className="relative w-full bg-white py-20 md:py-28"
         >
           <div className="mx-auto w-full max-w-[1600px] px-5 md:px-[150px] grid md:grid-cols-12 gap-10 md:gap-16 items-start">
-            {/* Image card */}
+            {/* Image card — DS oval pattern in place of rectangle */}
             <div className="md:col-span-5">
-              <div className="relative w-full h-[420px] md:h-[560px] overflow-hidden">
-                <Image
+              <Reveal variant="mask" duration={950}>
+                <OvalCard
                   src="/media/about/about-hero-image.jpg"
                   alt="Toya Terrebonne, owner and sole practitioner at Holistic Medspa."
-                  fill
-                  sizes="(max-width: 768px) 100vw, 600px"
-                  className="object-cover"
+                  width={600}
+                  height={420}
+                  className="mx-auto"
                 />
-                {/* Dusty-rose corner accent reusing DS §2.1 rose token */}
-                <div
-                  aria-hidden
-                  className="absolute bottom-0 left-0 right-0 h-2 bg-rose"
-                />
-              </div>
+              </Reveal>
               <p
-                className="font-manrope text-ink-body/70 mt-3"
+                className="font-manrope text-ink-body/70 mt-4 text-center"
                 style={{ fontSize: 13, lineHeight: 1.5, letterSpacing: "-0.2px" }}
               >
                 Owner-confirm portrait pending. Storefront placeholder used here in the interim.
@@ -441,6 +462,49 @@ export default function AboutPage() {
             >
               If that is the kind of place you have been looking for, we would like to meet you.
             </p>
+          </div>
+        </section>
+
+        {/* Storefront image-card slab (Stay-Connected style) — DS image-with-overlay-card pattern */}
+        <section aria-label="Storefront — find us" className="relative w-full bg-white py-8 md:py-12">
+          <div className="mx-auto w-full max-w-[1300px] px-5 md:px-0">
+            <Reveal variant="mask" duration={1000}>
+              <div className="relative overflow-hidden rounded-[28px]" style={{ minHeight: 360 }}>
+                <Image
+                  src="/media/contact-storefront-photo.jpg"
+                  alt="The brown brick storefront at 16148 W Main St, Cut Off, Louisiana."
+                  fill
+                  sizes="(max-width: 1300px) 100vw, 1300px"
+                  className="object-cover"
+                />
+                <div aria-hidden className="absolute inset-0 bg-overlay/55" />
+                <div className="relative px-8 md:px-16 py-16 md:py-20 max-w-[640px]">
+                  <p
+                    className="font-clash uppercase text-mint mb-3"
+                    style={{ fontSize: 13, letterSpacing: "0.7px", fontWeight: 500 }}
+                  >
+                    Find us
+                  </p>
+                  <h3
+                    className="font-spectral text-white mb-6 [word-break:break-word]"
+                    style={{
+                      fontSize: "clamp(32px, 4vw, 52px)",
+                      lineHeight: 1.05,
+                      letterSpacing: "-1.8px",
+                      fontWeight: 400,
+                    }}
+                  >
+                    The brown brick on West Main.
+                  </h3>
+                  <p
+                    className="font-manrope text-white/85 [word-break:break-word]"
+                    style={{ fontSize: 17, lineHeight: 1.55, letterSpacing: "-0.2px" }}
+                  >
+                    16148 W Main St, Cut Off, LA 70345. Parking in front. Hip-roof building, white window sign.
+                  </p>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </section>
 

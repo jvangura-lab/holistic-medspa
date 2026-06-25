@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import SplitText from "@/components/motion/SplitText";
+import Reveal from "@/components/motion/Reveal";
 
 /**
  * Footer — Figma nodeId 125:519.
@@ -28,9 +30,9 @@ export default function Footer() {
             fontWeight: 400,
           }}
         >
-          Ready for a transformative self-care experience?
+          <SplitText text="Ready for a transformative self-care experience?" stagger={70} duration={800} />
         </h2>
-        <div className="md:ml-[150px] flex flex-wrap items-center gap-6">
+        <Reveal variant="fade" delay={400} duration={700} className="md:ml-[150px] flex flex-wrap items-center gap-6">
           <Link
             href="/book"
             className="block rounded-pill border border-solid border-ink-body bg-transparent text-ink-deep text-center font-clash uppercase transition-[filter] duration-150 hover:brightness-90"
@@ -52,7 +54,7 @@ export default function Footer() {
           >
             Or call (985) 278-6087
           </a>
-        </div>
+        </Reveal>
       </div>
 
       {/* Wavy SVG divider — fills with the dark PANEL 2 color, rises up into the cream CTA panel

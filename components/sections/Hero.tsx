@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import SplitText from "@/components/motion/SplitText";
+import Reveal from "@/components/motion/Reveal";
 
 /**
  * Hero — Figma nodeId 125:499
@@ -84,7 +86,7 @@ export default function Hero() {
             fontWeight: 400,
           }}
         >
-          Mind · Body · Soul.
+          <SplitText text="Mind · Body · Soul." stagger={120} duration={900} />
         </h1>
 
         {/* Hero portrait ellipse: 559×335, rounded-306.5, 10px solid dusty-rose #c08181 border,
@@ -131,13 +133,18 @@ export default function Hero() {
           (985) 278-6087
         </a>
 
-        {/* SUB-COPY — Manrope 24px ink-body, w=640, left=150, top=851 (sits below 800h scrim on cream page bg) */}
-        <p
+        {/* SUB-COPY — Manrope 24px ink-body, w=640, left=150, top=851 (sits below 800h scrim on cream page bg)
+            Reveal fade with 500ms delay so it settles after headline cascade. */}
+        <Reveal
+          variant="fade"
+          delay={500}
+          duration={700}
+          as="p"
           className="absolute font-manrope left-[150px] text-ink-body top-[851px] w-[640px] [word-break:break-word]"
           style={{ fontSize: "24px", lineHeight: "28px", letterSpacing: "-0.48px", fontWeight: 400 }}
         >
           Naturopathy consultations, lymphatic drainage, infrared sauna, ZYTO scans, and essential-oil care — by appointment, by hand, by Toya. Cut Off, Louisiana. Call or text (985) 278-6087.
-        </p>
+        </Reveal>
       </div>
 
       {/* MOBILE layout — hero band stacked above sub-copy */}
@@ -168,7 +175,7 @@ export default function Hero() {
               fontWeight: 400,
             }}
           >
-            Mind · Body · Soul.
+            <SplitText text="Mind · Body · Soul." stagger={100} duration={700} />
           </h1>
           <div className="absolute bottom-6 left-5 right-5 flex items-center gap-3 flex-wrap">
             <Link

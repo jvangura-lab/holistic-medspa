@@ -6,6 +6,9 @@ import ReadyToBook from "@/components/sections/ReadyToBook";
 import Footer from "@/components/sections/Footer";
 import StickyMobileBar from "@/components/sections/StickyMobileBar";
 import NumberedSteps from "@/components/ui/NumberedSteps";
+import OvalCard from "@/components/ui/OvalCard";
+import PillBandQuote from "@/components/ui/PillBandQuote";
+import Reveal from "@/components/motion/Reveal";
 
 /**
  * /first-visit — Your First Visit
@@ -101,11 +104,35 @@ export default function FirstVisitPage() {
           </div>
         </section>
 
+        {/* PillBand quote — DS image-band between numbered steps and the "Bring with you" block */}
+        <section aria-label="A note on pace" className="relative w-full bg-white py-12 md:py-16">
+          <PillBandQuote
+            src="/media/services/service-bach-flowers.jpg"
+            alt="Quiet wellness imagery from the practice."
+            quote="We do not rush first visits."
+            attribution="Holistic Medspa — by appointment"
+            scrimOpacity={0.55}
+            minHeight={300}
+          />
+        </section>
+
         {/* What to bring + after-your-visit + small notes */}
         <section
           aria-label="What to bring and what we ask"
           className="relative w-full bg-cream py-20 md:py-28"
         >
+          {/* Oval image card on top of the "What to bring" band — DS pattern */}
+          <div className="mx-auto w-full max-w-[1300px] px-5 md:px-0 mb-12 md:mb-16">
+            <Reveal variant="mask" duration={950}>
+              <OvalCard
+                src="/media/first-visit/first-visit-step-cypress.jpg"
+                alt="Cypress imagery from the bayou region — a small grounding motif for the first visit."
+                width={820}
+                height={400}
+                className="mx-auto"
+              />
+            </Reveal>
+          </div>
           <div className="mx-auto w-full max-w-[1600px] px-5 md:px-[150px] grid md:grid-cols-2 gap-12 md:gap-20">
             {/* What to bring */}
             <div>

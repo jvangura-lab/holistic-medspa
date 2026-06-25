@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Reveal from "@/components/motion/Reveal";
+import SplitText from "@/components/motion/SplitText";
 
 /**
  * Stay Connected — Figma 125:391 wrapper + 125:493 centered H2.
@@ -30,13 +32,13 @@ export default function StayConnected() {
             fontWeight: 400,
           }}
         >
-          Stay Connected
+          <SplitText text="Stay Connected" stagger={140} duration={900} />
         </h2>
 
         {/* Desktop: 3-tile row at 1300 container width, ~420w each + gaps */}
         <div className="hidden md:flex justify-center gap-[20px]">
           {/* TILE 1: Gift Card — masked image + 80% black overlay */}
-          <div className="relative overflow-hidden rounded-[28px]" style={{ width: 420, height: 324 }}>
+          <Reveal variant="mask" duration={900} className="relative overflow-hidden rounded-[28px]" style={{ width: 420, height: 324 }}>
             <Image
               src="/media/service-pages/essential-oils-step-blending.jpg"
               alt=""
@@ -57,10 +59,10 @@ export default function StayConnected() {
             >
               Give the gift of an hour with Toya — a ZYTO scan, a Milly&apos;s Minutes session, or a Bach Flower consult. Call or text (985) 278-6087 to arrange.
             </p>
-          </div>
+          </Reveal>
 
           {/* TILE 2: Newsletter — bg #231f20 dark + email input + submit pill */}
-          <div className="relative overflow-hidden rounded-[28px] bg-ink-h2" style={{ width: 420, height: 324 }}>
+          <Reveal variant="mask" delay={180} duration={900} className="relative overflow-hidden rounded-[28px] bg-ink-h2" style={{ width: 420, height: 324 }}>
             <h3
               className="absolute font-clash text-white"
               style={{ left: 30, top: 20, fontSize: 31, fontWeight: 500, letterSpacing: 0 }}
@@ -96,10 +98,10 @@ export default function StayConnected() {
             >
               Occasional dispatches from the bayou. No spam, ever.
             </p>
-          </div>
+          </Reveal>
 
           {/* TILE 3: Become a Member — masked image + 80% #0e0f14 overlay */}
-          <div className="relative overflow-hidden rounded-[28px]" style={{ width: 420, height: 324 }}>
+          <Reveal variant="mask" delay={360} duration={900} className="relative overflow-hidden rounded-[28px]" style={{ width: 420, height: 324 }}>
             <Image
               src="/media/hero-poster.jpg"
               alt=""
@@ -120,7 +122,7 @@ export default function StayConnected() {
             >
               Returning clients across Bayou Lafourche have kept coming back since 2020. Ask Toya about ongoing care at your first visit.
             </p>
-          </div>
+          </Reveal>
         </div>
 
         {/* Mobile: stacked 1-per-row */}

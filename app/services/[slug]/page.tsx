@@ -11,6 +11,9 @@ import StickyMobileBar from "@/components/sections/StickyMobileBar";
 import Accordion from "@/components/ui/Accordion";
 import NumberedSteps from "@/components/ui/NumberedSteps";
 import PriceCard from "@/components/ui/PriceCard";
+import OvalCard from "@/components/ui/OvalCard";
+import PillBandQuote from "@/components/ui/PillBandQuote";
+import Reveal from "@/components/motion/Reveal";
 
 import {
   SERVICE_BY_SLUG,
@@ -202,6 +205,23 @@ function bulletsFor(svc: ServiceSpec): string[] {
   }
 }
 
+/** Per-service distilled quote — drawn from the service's whatItIs first sentence (already CONTENT.md prose). */
+function quoteFor(svc: ServiceSpec): string {
+  // Per-slug curated one-liners (extracted from each svc.hero.headline / shortest distilled idea —
+  // staying VERBATIM to copy already in services-data.ts; no new copy authored here).
+  const map: Record<string, string> = {
+    "zyto-wellness-scan": "A snapshot of your body’s signals. Not a diagnosis. A starting map.",
+    "lymphatic-drainage": "Gentle. Quiet. Restorative.",
+    "millys-minutes": "One dollar a minute. Three modalities. Your own proportions.",
+    "thermography": "Radiation-free thermal imaging — hosted at our Cut Off clinic.",
+    "naturopathy-consultation": "One quiet hour. No clipboard speed-run. We start by listening.",
+    "bach-flowers": "A small bottle for emotional weather.",
+    "essential-oils": "Real bottles on the shelf — and a private blending class when you bring seven friends.",
+    "hosted-modalities": "Two newer offerings, framed honestly.",
+  };
+  return map[svc.slug] ?? svc.hero.headline;
+}
+
 export default async function ServiceDeepPage({ params }: Props) {
   const { slug } = await params;
   const svc = SERVICE_BY_SLUG[slug];
@@ -210,6 +230,7 @@ export default async function ServiceDeepPage({ params }: Props) {
   const jsonLd = buildJsonLd(svc);
   const priceLine = pricelineFor(svc);
   const bullets = bulletsFor(svc);
+  const serviceQuote = quoteFor(svc);
 
   return (
     <>
@@ -288,6 +309,18 @@ export default async function ServiceDeepPage({ params }: Props) {
           </div>
         </section>
 
+        {/* PillBandQuote — DS image-band between "What it is" and "How it works" */}
+        <section aria-label="A distilled note" className="relative w-full bg-cream py-8 md:py-12">
+          <PillBandQuote
+            src={svc.hero.image}
+            alt={`Imagery for ${svc.name} at Holistic Medspa.`}
+            quote={serviceQuote}
+            attribution="Holistic Medspa — Cut Off, Louisiana"
+            scrimOpacity={0.6}
+            minHeight={300}
+          />
+        </section>
+
         {/* 3. HOW IT WORKS — dark band */}
         <section
           aria-label="How it works"
@@ -330,6 +363,18 @@ export default async function ServiceDeepPage({ params }: Props) {
             >
               What to expect
             </h2>
+            {/* OvalCard — DS oval pattern with the service image */}
+            <div className="mb-12 md:mb-16">
+              <Reveal variant="mask" duration={950}>
+                <OvalCard
+                  src={svc.hero.image}
+                  alt={`Visual context for ${svc.name}.`}
+                  width={680}
+                  height={360}
+                  className="mx-auto md:mx-0"
+                />
+              </Reveal>
+            </div>
             <dl className="grid md:grid-cols-2 gap-x-12 gap-y-8 max-w-[1100px]">
               {svc.whatToExpect.map((e) => (
                 <div key={e.label} className="border-t border-ink-body/15 pt-5">

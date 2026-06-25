@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import SplitText from "@/components/motion/SplitText";
 
 /**
  * Three sticky-stacking pill bands — Figma nodes 125:273, 125:280, 125:287.
@@ -51,7 +52,7 @@ export default function PillBands() {
                 fontWeight: 400,
               }}
             >
-              Sessions
+              <SplitText text="Sessions" stagger={120} duration={800} />
             </h2>
             <Link
               href="/services"
@@ -96,7 +97,7 @@ export default function PillBands() {
                 fontWeight: 400,
               }}
             >
-              Treatments
+              <SplitText text="Treatments" stagger={120} duration={800} />
             </h2>
             <Link
               href="/services"
@@ -140,7 +141,7 @@ export default function PillBands() {
                 fontWeight: 400,
               }}
             >
-              Services
+              <SplitText text="Services" stagger={120} duration={800} />
             </h2>
             <Link
               href="/services"

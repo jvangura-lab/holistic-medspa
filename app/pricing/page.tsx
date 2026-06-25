@@ -6,6 +6,9 @@ import ReadyToBook from "@/components/sections/ReadyToBook";
 import Footer from "@/components/sections/Footer";
 import StickyMobileBar from "@/components/sections/StickyMobileBar";
 import PriceCard from "@/components/ui/PriceCard";
+import OvalCard from "@/components/ui/OvalCard";
+import PillBandQuote from "@/components/ui/PillBandQuote";
+import Reveal from "@/components/motion/Reveal";
 
 /**
  * /pricing — Consolidated Pricing
@@ -123,6 +126,18 @@ export default function PricingPage() {
         ctaLabel="Request Consult"
       />
 
+      {/* PillBand header — DS image-band above pricing */}
+      <section aria-label="Pricing intro band" className="relative w-full bg-white py-12 md:py-16">
+        <PillBandQuote
+          src="/media/philosophy.jpg"
+          alt="Quiet pricing imagery — the practice on Bayou Lafourche."
+          quote="Honest prices, plainly listed."
+          attribution="Holistic Medspa — Cut Off, Louisiana"
+          scrimOpacity={0.6}
+          minHeight={300}
+        />
+      </section>
+
       {/* Pricing anchor cards (3 PriceCard) on cream */}
       <section
         aria-label="Anchor pricing cards"
@@ -179,18 +194,32 @@ export default function PricingPage() {
         className="relative w-full bg-white py-20 md:py-28"
       >
         <div className="mx-auto w-full max-w-[1600px] px-5 md:px-[150px]">
-          <h2
-            className="font-spectral text-ink-h2 mb-6 [word-break:break-word]"
-            style={{
-              maxWidth: 860,
-              fontSize: "clamp(34px, 4.4vw, 56px)",
-              lineHeight: 1.1,
-              letterSpacing: "-2px",
-              fontWeight: 400,
-            }}
-          >
-            The full list.
-          </h2>
+          <div className="grid md:grid-cols-12 gap-10 md:gap-16 mb-12 md:mb-14">
+            <div className="md:col-span-8">
+              <h2
+                className="font-spectral text-ink-h2 mb-6 [word-break:break-word]"
+                style={{
+                  maxWidth: 860,
+                  fontSize: "clamp(34px, 4.4vw, 56px)",
+                  lineHeight: 1.1,
+                  letterSpacing: "-2px",
+                  fontWeight: 400,
+                }}
+              >
+                The full list.
+              </h2>
+            </div>
+            <div className="md:col-span-4 hidden md:flex items-center justify-end">
+              <Reveal variant="mask" duration={900}>
+                <OvalCard
+                  src="/media/storefront.jpg"
+                  alt="The brown brick storefront in Cut Off."
+                  width={360}
+                  height={260}
+                />
+              </Reveal>
+            </div>
+          </div>
           <p
             className="font-manrope text-ink-body mb-12 md:mb-14 [word-break:break-word]"
             style={{

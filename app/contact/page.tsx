@@ -7,6 +7,9 @@ import ServiceHero from "@/components/sections/ServiceHero";
 import BookForm from "@/components/sections/BookForm";
 import Footer from "@/components/sections/Footer";
 import StickyMobileBar from "@/components/sections/StickyMobileBar";
+import OvalCard from "@/components/ui/OvalCard";
+import PillBandQuote from "@/components/ui/PillBandQuote";
+import Reveal from "@/components/motion/Reveal";
 
 /**
  * /contact — Contact
@@ -146,22 +149,17 @@ export default function ContactPage() {
                 </div>
               </dl>
 
-              {/* Storefront photo */}
-              <figure className="relative w-full h-[280px] md:h-[340px] overflow-hidden mb-4">
-                <Image
+              {/* Storefront photo — DS oval pattern */}
+              <Reveal variant="mask" duration={950}>
+                <OvalCard
                   src="/media/contact-storefront-photo.jpg"
                   alt="The Holistic Medspa storefront at 16148 W Main St, Cut Off, Louisiana — brown brick hip-roof building with white window sign."
-                  fill
-                  sizes="(max-width: 768px) 100vw, 600px"
-                  className="object-cover"
+                  width={500}
+                  height={340}
+                  className="mx-auto mb-4"
+                  caption="16148 W Main St, Cut Off, LA — parking in front, please come in."
                 />
-              </figure>
-              <figcaption
-                className="font-manrope text-ink-body/70"
-                style={{ fontSize: 13, lineHeight: 1.5, letterSpacing: "-0.2px" }}
-              >
-                16148 W Main St, Cut Off, LA 70345 — parking in front, please come in.
-              </figcaption>
+              </Reveal>
             </div>
 
             {/* Form */}
@@ -186,6 +184,18 @@ export default function ContactPage() {
               <BookForm source="/contact" />
             </div>
           </div>
+        </section>
+
+        {/* PillBand quote — full-width DS image-band between form and social */}
+        <section aria-label="Personal note" className="relative w-full bg-white py-12 md:py-16">
+          <PillBandQuote
+            src="/media/contact-storefront-photo.jpg"
+            alt="The brown brick storefront, West Main Street."
+            quote="By appointment, by hand, by Toya."
+            attribution="Holistic Medspa — Cut Off, Louisiana"
+            scrimOpacity={0.55}
+            minHeight={320}
+          />
         </section>
 
         {/* Social + map placeholder band on cream */}

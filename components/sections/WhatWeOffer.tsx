@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import Reveal from "@/components/motion/Reveal";
+import SplitText from "@/components/motion/SplitText";
 
 /**
  * What we offer — 8-tile service-card grid (DESIGN_SYSTEM.md §3.3 + §5 extension rule
@@ -86,13 +88,13 @@ export default function WhatWeOffer() {
             fontWeight: 400,
           }}
         >
-          What we offer
+          <SplitText text="What we offer" stagger={100} duration={800} />
         </h2>
 
         {/* Desktop: 4×2 grid centered within 1300 container */}
         <ul className="hidden md:grid grid-cols-4 gap-x-[40px] gap-y-[60px] mx-auto" style={{ maxWidth: 1300, paddingLeft: 0, paddingRight: 0 }}>
-          {cards.map((c) => (
-            <li key={c.title} className="group">
+          {cards.map((c, idx) => (
+            <Reveal as="li" variant="slide" direction="up" delay={(idx % 4) * 80} duration={700} key={c.title} className="group">
               <Link href={c.href} className="block">
                 <div className="mb-6" style={{ width: c.iconSize, height: c.iconSize }}>
                   <Image
@@ -127,7 +129,7 @@ export default function WhatWeOffer() {
                   </span>
                 </div>
               </Link>
-            </li>
+            </Reveal>
           ))}
         </ul>
 

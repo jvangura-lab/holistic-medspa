@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 
+import Image from "next/image";
 import Header from "@/components/sections/Header";
 import ServiceHero from "@/components/sections/ServiceHero";
 import BookForm from "@/components/sections/BookForm";
 import Footer from "@/components/sections/Footer";
 import StickyMobileBar from "@/components/sections/StickyMobileBar";
 import NumberedSteps from "@/components/ui/NumberedSteps";
+import OvalCard from "@/components/ui/OvalCard";
+import Reveal from "@/components/motion/Reveal";
 
 /**
  * /book — Request a Consultation
@@ -117,13 +120,31 @@ export default function BookPage() {
         </div>
       </section>
 
-      {/* Schedule paragraph + form */}
+      {/* Schedule paragraph + form — split with oval imagery on the left */}
       <section
         id="form"
         aria-label="Request consultation form"
         className="relative w-full bg-white py-20 md:py-28 scroll-mt-20"
       >
-        <div className="mx-auto w-full max-w-[820px] px-5 md:px-0">
+        <div className="mx-auto w-full max-w-[1300px] px-5 md:px-0 grid md:grid-cols-12 gap-10 md:gap-16 items-start">
+          <div className="md:col-span-4 md:sticky md:top-24">
+            <Reveal variant="mask" duration={1000}>
+              <OvalCard
+                src="/media/storefront.jpg"
+                alt="The Holistic Medspa storefront on West Main."
+                width={420}
+                height={520}
+                className="mx-auto"
+              />
+            </Reveal>
+            <p
+              className="font-clash uppercase text-mint mt-6 text-center md:text-left"
+              style={{ fontSize: 12, letterSpacing: "0.7px", fontWeight: 500 }}
+            >
+              The storefront — 16148 W Main St
+            </p>
+          </div>
+          <div className="md:col-span-8">
           <p
             className="font-clash uppercase text-mint mb-4"
             style={{ fontSize: 13, letterSpacing: "0.7px", fontWeight: 500 }}
@@ -148,17 +169,26 @@ export default function BookPage() {
             Toya is currently splitting time between Florida and Louisiana while caring for her son after his injury. Response time on form submissions and texts may run a day or two depending on when she is next in. We appreciate your patience and your understanding.
           </p>
           <BookForm source="/book" />
+          </div>
         </div>
       </section>
 
-      {/* What happens next */}
+      {/* What happens next — image-bg band per DS */}
       <section
         aria-label="What happens after you submit"
-        className="relative w-full bg-cream py-20 md:py-28"
+        className="relative w-full bg-ink-deep text-white py-20 md:py-28 overflow-hidden"
       >
-        <div className="mx-auto w-full max-w-[1600px] px-5 md:px-[150px]">
+        <Image
+          src="/media/services/service-bach-flowers.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-25 pointer-events-none"
+        />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-ink-deep/85 via-ink-deep/70 to-ink-deep/90" />
+        <div className="relative mx-auto w-full max-w-[1600px] px-5 md:px-[150px]">
           <h2
-            className="font-spectral text-ink-h2 mb-10 md:mb-14 [word-break:break-word]"
+            className="font-spectral text-white mb-10 md:mb-14 [word-break:break-word]"
             style={{
               maxWidth: 860,
               fontSize: "clamp(34px, 4.4vw, 56px)",
@@ -169,9 +199,9 @@ export default function BookPage() {
           >
             What happens after you send.
           </h2>
-          <NumberedSteps steps={NEXT_STEPS} surface="cream" />
+          <NumberedSteps steps={NEXT_STEPS} surface="dark" />
 
-          <div className="mt-16 md:mt-20 border-t border-ink-body/15 pt-10 max-w-[820px]">
+          <div className="mt-16 md:mt-20 border-t border-white/20 pt-10 max-w-[820px]">
             <p
               className="font-clash uppercase text-mint mb-3"
               style={{ fontSize: 13, letterSpacing: "0.7px", fontWeight: 500 }}
@@ -179,7 +209,7 @@ export default function BookPage() {
               If you prefer to skip the form
             </p>
             <p
-              className="font-manrope text-ink-body [word-break:break-word]"
+              className="font-manrope text-white/85 [word-break:break-word]"
               style={{ fontSize: 17, lineHeight: 1.65, letterSpacing: "-0.2px" }}
             >
               That is fine. Just call or text{" "}

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Reveal from "@/components/motion/Reveal";
 
 /**
  * Testimonial — Figma 125:494 wrapper.
@@ -29,27 +30,29 @@ export default function Testimonial() {
           />
         </div>
         {/* Quote body */}
-        <blockquote
-          className="font-spectral text-ink-body mx-auto [word-break:break-word]"
-          style={{
-            maxWidth: 860,
-            fontSize: "clamp(24px, 3.2vw, 40px)",
-            lineHeight: 1.18,
-            letterSpacing: "2px",
-            fontWeight: 400,
-          }}
-        >
-          <p className="mb-0">
-            Over five years of returning clients across Bayou Lafourche, Louisiana, Alabama, Arkansas, and Ohio. Holistic Medspa does not have a Google review wall yet — what we have is a community that keeps coming back.
-          </p>
-        </blockquote>
+        <Reveal variant="fade" duration={900}>
+          <blockquote
+            className="font-spectral text-ink-body mx-auto [word-break:break-word]"
+            style={{
+              maxWidth: 860,
+              fontSize: "clamp(24px, 3.2vw, 40px)",
+              lineHeight: 1.18,
+              letterSpacing: "2px",
+              fontWeight: 400,
+            }}
+          >
+            <p className="mb-0">
+              Over five years of returning clients across Bayou Lafourche, Louisiana, Alabama, Arkansas, and Ohio. Holistic Medspa does not have a Google review wall yet — what we have is a community that keeps coming back.
+            </p>
+          </blockquote>
+        </Reveal>
         {/* Attribution */}
-        <p
+        <Reveal variant="fade" delay={400} duration={700} as="p"
           className="font-clash text-ink-body mt-8"
           style={{ fontSize: 20, letterSpacing: "1px", fontWeight: 400 }}
         >
           Toya Terrebonne &middot; Holistic Medspa, Cut Off, LA
-        </p>
+        </Reveal>
       </div>
     </section>
   );

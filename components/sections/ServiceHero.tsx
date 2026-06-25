@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import SplitText from "@/components/motion/SplitText";
+import Reveal from "@/components/motion/Reveal";
 
 /**
  * ServiceHero — reduced-height hero (480px desktop / 380px mobile) per DESIGN_SYSTEM.md §5.1
@@ -65,11 +67,15 @@ export default function ServiceHero({
               fontWeight: 400,
             }}
           >
-            {headline}
+            <SplitText text={headline} stagger={80} duration={800} />
           </h1>
 
           {sub ? (
-            <p
+            <Reveal
+              variant="fade"
+              delay={350}
+              duration={700}
+              as="p"
               className="font-manrope text-white/85 [word-break:break-word]"
               style={{
                 fontSize: 20,
@@ -80,7 +86,7 @@ export default function ServiceHero({
               }}
             >
               {sub}
-            </p>
+            </Reveal>
           ) : null}
 
           <div className="flex items-center gap-6 flex-wrap">
@@ -133,7 +139,7 @@ export default function ServiceHero({
               fontWeight: 400,
             }}
           >
-            {headline}
+            <SplitText text={headline} stagger={60} duration={700} />
           </h1>
           {sub ? (
             <p
