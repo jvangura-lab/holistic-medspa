@@ -20,7 +20,7 @@ export default function Hero() {
   return (
     <section
       aria-label="Hero"
-      className="relative w-full overflow-hidden bg-white"
+      className="relative z-10 w-full md:overflow-visible overflow-hidden bg-white"
       style={{ minHeight: 940 }}
     >
       {/* Desktop layout — 1600px canvas absolute positioning */}
@@ -100,7 +100,7 @@ export default function Hero() {
           start="top top"
           end="bottom top"
           scrub={1}
-          className="absolute h-[335px] top-[640px] w-[559px]"
+          className="absolute z-20 h-[335px] top-[640px] w-[559px]"
           style={{ left: "calc(50% + 90px)" }}
         >
           <div

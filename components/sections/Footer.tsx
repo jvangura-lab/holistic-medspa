@@ -18,25 +18,8 @@ import Reveal from "@/components/motion/Reveal";
 export default function Footer() {
   return (
     <footer aria-label="Site footer" className="relative w-full bg-white">
-      {/* Wavy SVG divider — top of PANEL 1 (the cream CTA band) meeting the white page above.
-          Mirrors the dark band's wave below; fill = cream so PANEL 1 reads as a continuous
-          surface that rises into the white page with a wavy top edge. Decorative; aria-hidden.
-          (R3.A: added per owner request — PANEL 1 needed a wavy top to match PANEL 2.) */}
-      <svg
-        viewBox="0 0 1600 160"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        className="block w-full h-[60px] md:h-[120px] -mb-px"
-        style={{ display: "block" }}
-      >
-        <path
-          d="M0,80 C266,150 533,10 800,90 C1066,170 1333,20 1600,100 L1600,160 L0,160 Z"
-          fill="#f6f6f6"
-        />
-      </svg>
-
-      {/* PANEL 1 — Ready-CTA on cream bg, 1600 canvas */}
-      <div className="relative w-full bg-cream">
+      {/* PANEL 1 — Ready-CTA on light grey bg, 1600 canvas */}
+      <div className="relative w-full" style={{ backgroundColor: "#e8e8e8" }}>
         <div className="relative mx-auto w-full max-w-[1600px] px-5 md:px-0 pt-20 md:pt-28 pb-16 md:pb-24">
         <h2
           className="font-spectral text-ink-deep md:ml-[150px] mb-10 md:mb-12 [word-break:break-word]"
@@ -48,7 +31,7 @@ export default function Footer() {
             fontWeight: 400,
           }}
         >
-          <SplitText text="Ready for a transformative self-care experience?" stagger={70} duration={800} />
+          <SplitText text="Ready for a transformative self-care experience?" stagger={0.07} duration={0.8} />
         </h2>
         <Reveal variant="fade" delay={400} duration={700} className="md:ml-[150px] flex flex-wrap items-center gap-6">
           <Link
@@ -76,32 +59,8 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Wavy SVG divider — fills with the dark PANEL 2 color, rises up into the cream CTA panel
-          to create the wave-rim transition shown in the design reference. Decorative; aria-hidden.
-          (R3.A: amplified — viewBox 100 → 160, peaks at y=10 / y=150 for ~50-80% more vertical
-          excursion. Mirrors the new PANEL 1 top wave above for sitewide rhythm.) */}
-      <svg
-        viewBox="0 0 1600 160"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        className="block w-full h-[60px] md:h-[120px] -mb-px"
-        style={{ display: "block" }}
-      >
-        <path
-          d="M0,80 C266,10 533,150 800,70 C1066,-10 1333,140 1600,60 L1600,160 L0,160 Z"
-          fill="#1a1a1a"
-        />
-      </svg>
-
-      {/* PANEL 2 — Dark footer with decorative rectangle104 SVG bg + links */}
-      <div className="relative w-full bg-[#1a1a1a] text-white overflow-hidden">
-        <Image
-          src="/figma-assets/imgRectangle104.svg"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover opacity-30 pointer-events-none"
-        />
+      {/* PANEL 2 — Black footer with links + subtle vector accent */}
+      <div className="relative w-full bg-black text-white overflow-hidden">
         <Image
           src="/figma-assets/imgVector4.svg"
           alt=""
@@ -194,7 +153,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* PANEL 3 — Black copyright bar */}
+      {/* PANEL 3 — Black copyright bar (same color as Panel 2, no wave between them). */}
       <div className="w-full bg-black">
         <div className="mx-auto w-full max-w-[1600px] px-5 md:px-0 h-[84px] flex items-center justify-between md:px-[150px]">
           <div className="flex gap-8">

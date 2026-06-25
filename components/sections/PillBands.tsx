@@ -46,13 +46,20 @@ function StackingBand({
   // Each band's scale animates over its own scroll segment (i/count → 1) so the
   // shrink coincides with the next band entering.
   const scale = useTransform(progress, [i / count, 1], [1, targetScale]);
-  // Only the last band fades on exit — others stay at full opacity beneath the stack.
-  const opacity = useTransform(progress, [0.85, 1], isLast ? [1, 0] : [1, 1]);
+  // All bands stay fully opaque — the previous opacity-to-zero on the last band
+  // hid the card mid-stack and broke clickability. Visual hand-off to the next
+  // section is handled by marginBottom on the parent section.
+  void isLast;
+
+  // All bands use full h-screen pin so each card has the full viewport to
+  // settle visibly. Last card needs the same dwell as the others — user
+  // explicitly wants the next section to WAIT until Services has settled.
+  void isLast;
 
   return (
     <div className="h-screen sticky top-0 flex items-start justify-center pt-[12vh]">
       <motion.div
-        style={{ scale, opacity, transformOrigin: "top center" }}
+        style={{ scale, transformOrigin: "top center" }}
         className="relative w-[90%] max-w-[1300px] h-[480px] rounded-[50px] overflow-hidden shadow-[0_24px_80px_-30px_rgba(0,0,0,0.45)]"
       >
         <Image
@@ -116,7 +123,7 @@ export default function PillBands() {
     <section
       ref={containerRef}
       aria-label="What we offer — sessions, treatments, services"
-      className="relative w-full bg-white"
+      className="relative w-full bg-white md:pb-32"
     >
       {/* DESKTOP — sticky-stacking with motion/react useScroll + useTransform.
           Each band is its own h-screen sticky child. Sticky's natural top:0 + z-stacking

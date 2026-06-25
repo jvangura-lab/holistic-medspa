@@ -31,7 +31,7 @@ export default function StayConnected() {
             fontWeight: 400,
           }}
         >
-          <SplitText text="Stay Connected" stagger={140} duration={900} />
+          <SplitText text="Stay Connected" stagger={0.14} duration={0.9} />
         </h2>
 
         {/* Desktop: 3-tile row at 1300 container width, ~420w each + gaps */}

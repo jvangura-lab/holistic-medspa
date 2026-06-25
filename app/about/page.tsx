@@ -167,13 +167,6 @@ export default function AboutPage() {
           aria-label="The 2025 transition"
           className="relative w-full bg-[#1a1a1a] text-white py-20 md:py-28 overflow-hidden"
         >
-          <Image
-            src="/figma-assets/imgRectangle104.svg"
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover opacity-20 pointer-events-none"
-          />
           <div className="relative mx-auto w-full max-w-[1600px] px-5 md:px-[150px] grid md:grid-cols-12 gap-10 md:gap-16">
             <div className="md:col-span-5">
               <p
@@ -217,6 +210,7 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
 
         {/* Toya — image + body split */}
         <section

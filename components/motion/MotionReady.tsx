@@ -88,6 +88,25 @@ export function MotionReadyProvider({ children }: { children: ReactNode }) {
     setLenis(true);
   }, []);
 
+  // Safety net: if Lenis fails to init OR document.fonts.ready / window load
+  // never resolves on a given route, force the gate open so ScrollReveal/SplitText
+  // don't strand content at opacity:0 forever. Lenis race kicks in at 1.2s;
+  // full fallback at 2.5s.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (prefersReducedMotion()) return;
+    const lenisTimer = window.setTimeout(() => setLenis(true), 1200);
+    const fullTimer = window.setTimeout(() => {
+      setLenis(true);
+      setWindowLoaded(true);
+      setFontsLoaded(true);
+    }, 2500);
+    return () => {
+      window.clearTimeout(lenisTimer);
+      window.clearTimeout(fullTimer);
+    };
+  }, []);
+
   const ready = reducedMotion || (windowLoaded && fontsLoaded && lenisReady);
 
   // Broadcast a one-shot event for any escape-hatch code (e.g. third-party libs)
