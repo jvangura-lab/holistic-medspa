@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import MobileNavDrawer from "@/components/mobile/MobileNavDrawer";
 
 /**
  * Header — Figma nodeId 125:510
@@ -84,7 +85,9 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Mobile compact header: wordmark left + Book Now pill right */}
+        {/* Mobile compact header: wordmark left + Book pill + hamburger drawer (R4.A mobile pass).
+            Skill: deep nav (20 routes) requires a drawer; bottom-right thumb-reach for hamburger.
+            All actions ≥44pt tap targets per accessibility rule. */}
         <div className="md:hidden flex items-center justify-between h-full px-4 pt-4">
           <Link
             href="/"
@@ -93,13 +96,22 @@ export default function Header() {
           >
             Holistic Medspa
           </Link>
-          <Link
-            href="/book"
-            className="font-clash bg-mint text-black uppercase rounded-pill px-5 py-2"
-            style={{ fontSize: "14px", letterSpacing: "0.7px", fontWeight: 500 }}
-          >
-            Book Now
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/book"
+              className="font-clash bg-mint text-black uppercase rounded-pill inline-flex items-center justify-center"
+              style={{
+                fontSize: "13px",
+                letterSpacing: "0.7px",
+                fontWeight: 500,
+                minHeight: 44,
+                paddingInline: 18,
+              }}
+            >
+              Book
+            </Link>
+            <MobileNavDrawer />
+          </div>
         </div>
       </div>
     </header>

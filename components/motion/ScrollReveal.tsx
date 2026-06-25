@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { registerEases } from "@/lib/motion/eases";
 import { prefersReducedMotion } from "@/lib/motion/prefersReducedMotion";
+import { useMotionReady } from "./MotionReady";
 
 type Variant = "mask" | "lift" | "unblur" | "iris";
 
@@ -20,6 +21,10 @@ type Variant = "mask" | "lift" | "unblur" | "iris";
  * Triggered by GSAP ScrollTrigger onEnter at start "top 78%".
  * Uses brand ease "veil" (calm, drawn-out).
  * Honors prefers-reduced-motion: skips animation, renders at final state.
+ *
+ * R4.C: gated on useMotionReady() — content renders at final state until page is
+ * fully loaded (fonts + images + Lenis). Prevents stale-position triggers and
+ * stuck-invisible content.
  */
 export default function ScrollReveal({
   children,
@@ -43,6 +48,7 @@ export default function ScrollReveal({
   once?: boolean;
 }) {
   const ref = useRef<HTMLElement | null>(null);
+  const ready = useMotionReady();
 
   useEffect(() => {
     const node = ref.current;
@@ -52,6 +58,8 @@ export default function ScrollReveal({
       gsap.set(node, { clearProps: "all" });
       return;
     }
+    // Gate: wait until page fully loaded. Content stays visible at final state.
+    if (!ready) return;
 
     gsap.registerPlugin(ScrollTrigger);
     registerEases();
@@ -85,20 +93,34 @@ export default function ScrollReveal({
       }
     })();
 
+    // If the element is ALREADY in view at the moment we wire up (e.g. it lives
+    // above-the-fold and ready flipped true after window.load), check rect first.
+    // If already past start, play immediately without ScrollTrigger; otherwise wire ST.
+    const rect = node.getBoundingClientRect();
+    const vh = window.innerHeight;
+    // Match the "top 78%" semantic — element top is past 78% of viewport from top.
+    const startThreshold = vh * 0.78;
+    const alreadyInView = rect.top < startThreshold;
+
     gsap.set(node, initial);
 
-    const tween = gsap.to(node, {
-      ...final,
-      duration,
-      delay,
-      ease: "veil",
-      scrollTrigger: {
-        trigger: node,
-        start,
-        toggleActions: once ? "play none none none" : "play reverse play reverse",
-        // markers: true, // dev only
-      },
-    });
+    const tween = alreadyInView
+      ? gsap.to(node, { ...final, duration, delay, ease: "veil" })
+      : gsap.to(node, {
+          ...final,
+          duration,
+          delay,
+          ease: "veil",
+          scrollTrigger: {
+            trigger: node,
+            start,
+            toggleActions: once ? "play none none none" : "play reverse play reverse",
+          },
+        });
+
+    // Force a refresh so the newly-created trigger's position is calculated against
+    // the now-final layout.
+    ScrollTrigger.refresh();
 
     return () => {
       tween.kill();
@@ -106,7 +128,7 @@ export default function ScrollReveal({
         .filter((t) => t.trigger === node)
         .forEach((t) => t.kill());
     };
-  }, [variant, delay, duration, start, once]);
+  }, [variant, delay, duration, start, once, ready]);
 
   const Component = Tag as ElementType;
   return (

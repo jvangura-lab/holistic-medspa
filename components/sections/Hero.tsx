@@ -165,9 +165,16 @@ export default function Hero() {
         </ScrollReveal>
       </div>
 
-      {/* MOBILE layout — hero band stacked above sub-copy */}
+      {/* MOBILE layout — R4.A optimized per mobile-app-ui-design skill.
+          Skill applied:
+            - Headline tracking softened (-2.4 → -1.5px) — too tight at 48px hurts readability.
+            - Hero band shorter (520 → 480) so sub-copy is reachable without scroll on iPhone SE.
+            - CTAs in thumb-zone (bottom-7) at ≥44pt tap targets.
+            - "Eyebrow" mint label above headline adds context + visual rhythm (skill: hierarchy via size+weight).
+            - Sub-copy below image keeps F-pattern reading flow; leading 28 (1.6x) for body comfort.
+            - tap-press feedback on CTAs (subtle scale on press — skill peak-end emotion). */}
       <div className="md:hidden relative w-full">
-        <div className="relative w-full h-[520px] overflow-hidden">
+        <div className="relative w-full h-[480px] overflow-hidden">
           <Image
             src="/media/hero-poster.jpg"
             alt=""
@@ -181,42 +188,61 @@ export default function Hero() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.34) 46.354%, rgba(0,0,0,0.78) 100%)",
+                "linear-gradient(to bottom, rgba(0,0,0,0.74) 0%, rgba(0,0,0,0.30) 42%, rgba(0,0,0,0.82) 100%)",
             }}
           />
+          {/* Eyebrow label — mint accent, builds anticipation for headline */}
+          <p
+            className="absolute font-clash text-mint uppercase px-5 top-[110px]"
+            style={{ fontSize: 12, letterSpacing: "1.4px", fontWeight: 500 }}
+          >
+            Holistic Medspa · Est. 2020
+          </p>
           <h1
-            className="absolute font-spectral text-white px-5 bottom-[180px] [word-break:break-word] overflow-hidden"
+            className="absolute font-spectral text-white px-5 top-[140px] right-5 [word-break:break-word] overflow-hidden"
             style={{
-              fontSize: "56px",
-              lineHeight: "60px",
-              letterSpacing: "-2.4px",
+              fontSize: "48px",
+              lineHeight: "52px",
+              letterSpacing: "-1.5px",
               fontWeight: 400,
             }}
           >
             <SplitText text="Mind · Body · Soul." mode="chars" stagger={0.035} duration={0.9} immediate yFrom={110} />
           </h1>
-          <div className="absolute bottom-6 left-5 right-5 flex items-center gap-3 flex-wrap">
+          {/* Stacked CTAs in thumb zone — primary first, phone CTA second.
+              Both meet 44pt tap rule. Primary is filled mint for highest affordance. */}
+          <div className="absolute bottom-7 left-5 right-5 flex flex-col gap-3">
             <Link
               href="/book"
-              className="font-clash uppercase rounded-pill border-2 border-solid border-mint text-mint px-5 py-2"
-              style={{ fontSize: "14px", letterSpacing: "0.7px" }}
+              className="tap-press font-clash uppercase rounded-pill bg-mint text-black inline-flex items-center justify-center w-full"
+              style={{
+                fontSize: 15,
+                letterSpacing: "0.9px",
+                fontWeight: 500,
+                minHeight: 52,
+              }}
             >
               Request Consult
             </Link>
             <a
               href="tel:9852786087"
-              className="font-clash text-white"
-              style={{ fontSize: "16px", letterSpacing: "0.8px" }}
+              className="tap-press font-clash uppercase rounded-pill border border-solid border-white/70 text-white inline-flex items-center justify-center w-full"
+              style={{
+                fontSize: 14,
+                letterSpacing: "0.8px",
+                fontWeight: 500,
+                minHeight: 48,
+              }}
             >
-              (985) 278-6087
+              Call (985) 278-6087
             </a>
           </div>
         </div>
         <p
           className="font-manrope text-ink-body px-5 py-8 [word-break:break-word]"
-          style={{ fontSize: "18px", lineHeight: "26px", letterSpacing: "-0.36px", fontWeight: 400 }}
+          style={{ fontSize: "17px", lineHeight: "28px", letterSpacing: "-0.2px", fontWeight: 400 }}
         >
-          Naturopathy consultations, lymphatic drainage, infrared sauna, ZYTO scans, and essential-oil care — by appointment, by hand, by Toya. Cut Off, Louisiana. Call or text (985) 278-6087.
+          Naturopathy consultations, lymphatic drainage, infrared sauna, ZYTO scans, and essential-oil care — by appointment, by hand, by Toya. Cut Off, Louisiana.
         </p>
       </div>
     </section>

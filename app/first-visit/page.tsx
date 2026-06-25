@@ -109,8 +109,8 @@ export default function FirstVisitPage() {
             removing the visible whitespace gap reported under "We do not rush first visits.") */}
         <section aria-label="A note on pace" className="relative w-full bg-white pt-12 md:pt-16 pb-4 md:pb-6">
           <PillBandQuote
-            src="/media/services/service-bach-flowers.jpg"
-            alt="Quiet wellness imagery from the practice."
+            src="/media/round-2/tea/pexels-rustic-herbal-tea-wooden-board-34705969.jpg"
+            alt="A variety of herbal teas displayed on wooden spoons against a rustic backdrop."
             quote="We do not rush first visits."
             attribution="Holistic Medspa — by appointment"
             scrimOpacity={0.55}
@@ -315,7 +315,7 @@ export default function FirstVisitPage() {
         />
         <Footer />
         <StickyMobileBar />
-        <div className="md:hidden h-[56px]" aria-hidden />
+        <div className="md:hidden" aria-hidden style={{ height: "calc(64px + env(safe-area-inset-bottom))" }} />
       </main>
     </>
   );

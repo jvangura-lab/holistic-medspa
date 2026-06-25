@@ -141,35 +141,55 @@ export default function WhatWeOffer() {
           ))}
         </ul>
 
-        {/* Mobile: 2-col grid */}
-        <ul className="md:hidden grid grid-cols-2 gap-x-6 gap-y-10">
-          {cards.map((c) => (
-            <li key={c.title} className="group">
-              <Link href={c.href} className="block">
-                <div className="mb-4" style={{ width: 56, height: 56 }}>
-                  <Image src={c.icon} alt="" width={56} height={56} className="block" />
-                </div>
-                <h3
-                  className="font-clash text-ink-body mb-2"
-                  style={{ fontSize: 16, letterSpacing: "0.8px", fontWeight: 400, lineHeight: 1.2 }}
+        {/* Mobile — R4.A optimized: horizontal swipe carousel with cream tile bg.
+            Skill: 8 services in 2-col grid = 4 rows of vertical scroll = scroll fatigue.
+            Swipe carousel with 70vw tiles + peek-of-next reads more native, exposes all
+            8 services without scroll cost, supports left-thumb-led discovery flow.
+            Each tile bg-cream + isolated icon (skill: color-coded cards with soft bg
+            + clean isolated images = effortless scanning).  */}
+        <div className="md:hidden -mx-5">
+          <ul className="scroll-snap-x gap-3 px-5">
+            {cards.map((c) => (
+              <li
+                key={c.title}
+                className="scroll-snap-item"
+                style={{ width: "70vw", maxWidth: 270 }}
+              >
+                <Link
+                  href={c.href}
+                  className="tap-press block bg-cream rounded-[20px] p-5 h-[200px] relative overflow-hidden"
                 >
-                  {c.title}
-                </h3>
-                <div className="flex items-center gap-2">
-                  <span
-                    className="font-manrope text-ink-body uppercase"
-                    style={{ fontSize: 12, letterSpacing: "0.6px", fontWeight: 400 }}
+                  <div className="mb-3" style={{ width: 64, height: 64 }}>
+                    <Image src={c.icon} alt="" width={64} height={64} className="block" />
+                  </div>
+                  <h3
+                    className="font-clash text-ink-deep [word-break:break-word]"
+                    style={{ fontSize: 17, letterSpacing: "0.4px", fontWeight: 500, lineHeight: 1.25 }}
                   >
-                    Read More
-                  </span>
-                  <span className="inline-block w-[16px] h-[11px] transition-transform duration-150 ease-out group-hover:translate-x-1">
-                    <Image src="/figma-assets/imgGroup4.svg" alt="" width={16} height={11} className="block" />
-                  </span>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
+                    {c.title}
+                  </h3>
+                  <div className="absolute bottom-5 left-5 flex items-center gap-2">
+                    <span
+                      className="font-manrope text-ink-body/70 uppercase"
+                      style={{ fontSize: 11, letterSpacing: "0.8px", fontWeight: 500 }}
+                    >
+                      Read
+                    </span>
+                    <span className="inline-block w-[14px] h-[10px]">
+                      <Image src="/figma-assets/imgGroup4.svg" alt="" width={14} height={10} className="block" />
+                    </span>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p
+            className="text-center font-clash uppercase text-ink-body/40 mt-4 px-5"
+            style={{ fontSize: 10, letterSpacing: "1.4px", fontWeight: 500 }}
+          >
+            8 sessions · Swipe →
+          </p>
+        </div>
       </div>
     </section>
   );

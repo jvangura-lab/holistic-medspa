@@ -114,7 +114,7 @@ export default function LegalPage({
 
       <Footer />
       <StickyMobileBar />
-      <div className="md:hidden h-[56px]" aria-hidden />
+      <div className="md:hidden" aria-hidden style={{ height: "calc(64px + env(safe-area-inset-bottom))" }} />
     </main>
   );
 }

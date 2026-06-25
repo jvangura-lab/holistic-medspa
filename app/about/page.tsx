@@ -474,8 +474,8 @@ export default function AboutPage() {
             <Reveal variant="mask" duration={1000}>
               <div className="relative overflow-hidden rounded-[28px]" style={{ minHeight: 360 }}>
                 <Image
-                  src="/media/contact-storefront-photo.jpg"
-                  alt="The brown brick storefront at 16148 W Main St, Cut Off, Louisiana."
+                  src="/media/round-2/bayou/pixabay-bayou-louisiana-3634929.jpg"
+                  alt="A south-Louisiana bayou scene near Cut Off — water, sky, and cypress."
                   fill
                   sizes="(max-width: 1300px) 100vw, 1300px"
                   className="object-cover"
@@ -570,7 +570,7 @@ export default function AboutPage() {
         />
         <Footer />
         <StickyMobileBar />
-        <div className="md:hidden h-[56px]" aria-hidden />
+        <div className="md:hidden" aria-hidden style={{ height: "calc(64px + env(safe-area-inset-bottom))" }} />
       </main>
     </>
   );

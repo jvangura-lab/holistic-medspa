@@ -98,7 +98,7 @@ export default function ServicesIndexPage() {
             >
               <div className="absolute inset-0 bg-black rounded-pill" />
               <Image
-                src="/media/figma-slots/sessions-band-bg.jpg"
+                src="/media/round-2/spa/burst-all-natural-spa-decorations.jpg"
                 alt=""
                 fill
                 sizes="1300px"
@@ -123,7 +123,7 @@ export default function ServicesIndexPage() {
             <div className="relative h-[140px] rounded-[28px] overflow-hidden">
               <div className="absolute inset-0 bg-black" />
               <Image
-                src="/media/figma-slots/sessions-band-bg.jpg"
+                src="/media/round-2/spa/burst-all-natural-spa-decorations.jpg"
                 alt=""
                 fill
                 sizes="100vw"
@@ -265,7 +265,7 @@ export default function ServicesIndexPage() {
         <ScheduleSession />
         <Footer />
         <StickyMobileBar />
-        <div className="md:hidden h-[56px]" aria-hidden />
+        <div className="md:hidden" aria-hidden style={{ height: "calc(64px + env(safe-area-inset-bottom))" }} />
       </main>
     </>
   );

@@ -250,3 +250,84 @@
     transform: translateY(0);
   }
 }
+
+/* ----------------------------------------------------------------
+ * R4.A — Mobile-only utilities (mobile-app-ui-design skill)
+ *
+ * These utilities exist exclusively for the <md mobile pass and are
+ * gated by max-width: 767px so they cannot leak into desktop. They
+ * encode the patterns the skill identified as native-mobile:
+ *   - horizontal swipe carousels with snap (.scroll-snap-x + items)
+ *   - thumb-zone bottom padding for the sticky CTA bar
+ *   - safe-area-aware bottom inset for iPhone notch
+ *   - 44×44pt tap-target minimum (skill accessibility rule)
+ *   - hide native scrollbar on carousels for clean look
+ *   - momentum-style touch behavior
+ * ---------------------------------------------------------------- */
+@layer utilities {
+  /* Sticky-mobile-bar avoidance — last section gets pb-24 on mobile so
+     fixed bar (h≈56 + safe-area) never overlaps content. */
+  .thumb-zone-spacing {
+    padding-bottom: calc(96px + env(safe-area-inset-bottom));
+  }
+  @media (min-width: 768px) {
+    .thumb-zone-spacing {
+      padding-bottom: 0;
+    }
+  }
+
+  /* iPhone-notch-aware bottom inset (utility variant). */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* 44×44pt minimum tap target — WCAG / Apple HIG / Material.
+     Use on small action chips, icon-buttons, social icons on mobile. */
+  .tap-target {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Horizontal scroll-snap carousel — applied to the SCROLLER container.
+     Use with `.scroll-snap-item` on each child. Mobile-only — desktop
+     swipe-carousels are rare; if needed for desktop add a separate utility. */
+  .scroll-snap-x {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: 20px;
+    scrollbar-width: none;
+  }
+  .scroll-snap-x::-webkit-scrollbar {
+    display: none;
+  }
+  .scroll-snap-item {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    flex-shrink: 0;
+  }
+
+  /* Touch-friendly active state hint for tappable cards/tiles.
+     Subtle press-feedback (skill: peak-end emotion). */
+  .tap-press {
+    transition: transform 120ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .tap-press:active {
+    transform: scale(0.98);
+  }
+
+  /* Reduced-motion override for tap-press — match base motion rule. */
+  @media (prefers-reduced-motion: reduce) {
+    .tap-press {
+      transition: none;
+    }
+    .tap-press:active {
+      transform: none;
+    }
+  }
+}

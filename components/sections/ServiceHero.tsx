@@ -123,8 +123,14 @@ export default function ServiceHero({
         </div>
       </div>
 
-      {/* MOBILE — 420px band, flow stack pinned bottom (no fixed-y overlap) */}
-      <div className="md:hidden relative w-full min-h-[420px] overflow-hidden">
+      {/* MOBILE — R4.A optimized.
+          Skill applied:
+            - Increased band height (420 → 460) so taller service names breathe.
+            - Headline tracking softened (-1.4 → -1px) for 32px size readability.
+            - Body sub-copy line-height 24 (1.6x) per skill body comfort rule.
+            - Primary CTA is filled mint (highest affordance); phone is outline secondary.
+            - Both CTAs ≥48pt tap targets, full-width stacked for thumb-zone reach. */}
+      <div className="md:hidden relative w-full min-h-[460px] overflow-hidden">
         <Image
           src={image}
           alt={imageAlt}
@@ -138,16 +144,16 @@ export default function ServiceHero({
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.34) 46%, rgba(0,0,0,0.74) 100%)",
+              "linear-gradient(to bottom, rgba(0,0,0,0.74) 0%, rgba(0,0,0,0.32) 46%, rgba(0,0,0,0.80) 100%)",
           }}
         />
-        <div className="absolute inset-x-0 bottom-5 left-0 right-0 px-5 flex flex-col gap-4">
+        <div className="absolute inset-x-0 bottom-6 left-0 right-0 px-5 flex flex-col gap-4">
           <h1
             className="font-spectral text-white [word-break:break-word] overflow-hidden"
             style={{
-              fontSize: "32px",
-              lineHeight: "36px",
-              letterSpacing: "-1.4px",
+              fontSize: "34px",
+              lineHeight: "38px",
+              letterSpacing: "-1px",
               fontWeight: 400,
             }}
           >
@@ -156,26 +162,36 @@ export default function ServiceHero({
           {sub ? (
             <p
               className="font-manrope text-white/85 [word-break:break-word]"
-              style={{ fontSize: 15, lineHeight: "22px", fontWeight: 400 }}
+              style={{ fontSize: 15, lineHeight: "24px", letterSpacing: "-0.15px", fontWeight: 400 }}
             >
               {sub}
             </p>
           ) : null}
-          <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex flex-col gap-2.5 mt-1">
             <Link
               href={ctaHref}
-              className="font-clash uppercase rounded-pill border-2 border-solid border-mint text-mint px-5 py-2"
-              style={{ fontSize: 14, letterSpacing: "0.7px" }}
+              className="tap-press font-clash uppercase rounded-pill bg-mint text-black inline-flex items-center justify-center w-full"
+              style={{
+                fontSize: 14,
+                letterSpacing: "0.8px",
+                fontWeight: 500,
+                minHeight: 50,
+              }}
             >
               {ctaLabel}
             </Link>
             {showPhone ? (
               <a
                 href="tel:9852786087"
-                className="font-clash text-white"
-                style={{ fontSize: 15, letterSpacing: "0.7px" }}
+                className="tap-press font-clash uppercase rounded-pill border border-solid border-white/70 text-white inline-flex items-center justify-center w-full"
+                style={{
+                  fontSize: 13,
+                  letterSpacing: "0.7px",
+                  fontWeight: 500,
+                  minHeight: 46,
+                }}
               >
-                (985) 278-6087
+                Call (985) 278-6087
               </a>
             ) : null}
           </div>

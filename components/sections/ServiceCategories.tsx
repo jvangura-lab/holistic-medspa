@@ -173,34 +173,63 @@ export default function ServiceCategories() {
           ))}
         </ul>
 
-        {/* Mobile: 1-col stacked */}
-        <ul className="md:hidden space-y-5">
+        {/* Mobile — R4.A optimized: rounded-[20px] cards, tighter padding,
+            price-amount as the visual hero (skill: monospace-feel numbers as peak moment).
+            CTA is tap-press + ≥52pt. */}
+        <ul className="md:hidden space-y-4">
           {cards.map((c) => (
             <li
               key={c.title}
-              className="relative backdrop-blur-[5px] p-6"
+              className="relative backdrop-blur-[5px] p-5 rounded-[20px] tap-press"
               style={{ background: "rgba(125,184,138,0.6)" }}
             >
-              <h3 className="font-clash text-ink-deep mb-4" style={{ fontSize: 24, fontWeight: 500 }}>
-                {c.title}
-              </h3>
-              <div className="mb-4" style={{ letterSpacing: "-0.8px" }}>
-                <span className="font-manrope text-ink-deep align-top" style={{ fontSize: 18 }}>$</span>
-                <span className="font-manrope text-ink-deep" style={{ fontSize: 56 }}>{c.priceDigits}</span>
-                <span className="font-manrope text-ink-h2 ml-1" style={{ fontSize: 16 }}>{c.priceSuffix}</span>
+              {/* Header row — title + price side-by-side for compact scan */}
+              <div className="flex items-start justify-between gap-3 mb-4">
+                <h3
+                  className="font-clash text-ink-deep flex-1 [word-break:break-word]"
+                  style={{ fontSize: 20, fontWeight: 500, lineHeight: 1.2, letterSpacing: "0.3px" }}
+                >
+                  {c.title}
+                </h3>
+                <div
+                  className="font-manrope text-ink-deep flex items-baseline flex-shrink-0"
+                  style={{ letterSpacing: "-0.6px" }}
+                >
+                  <span className="align-top" style={{ fontSize: 16, lineHeight: 1 }}>$</span>
+                  <span style={{ fontSize: 44, lineHeight: 1, fontWeight: 400 }}>
+                    {c.priceDigits}
+                  </span>
+                </div>
               </div>
-              <ul className="space-y-2 mb-6">
+              <p
+                className="font-manrope text-ink-h2 mb-4 -mt-2"
+                style={{ fontSize: 13, fontWeight: 500, letterSpacing: "0.2px" }}
+              >
+                {c.priceSuffix}
+              </p>
+              <ul className="space-y-2 mb-5">
                 {c.bullets.map((b, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <Image src="/figma-assets/imgMdiTick.svg" alt="" width={16} height={15} className="mt-1 flex-shrink-0" />
-                    <span className="font-manrope text-ink-deep" style={{ fontSize: 14, lineHeight: 1.4 }}>{b}</span>
+                  <li key={i} className="flex items-start gap-2.5">
+                    <Image
+                      src="/figma-assets/imgMdiTick.svg"
+                      alt=""
+                      width={16}
+                      height={15}
+                      className="mt-1 flex-shrink-0"
+                    />
+                    <span
+                      className="font-manrope text-ink-deep"
+                      style={{ fontSize: 14, lineHeight: 1.45, letterSpacing: "-0.15px" }}
+                    >
+                      {b}
+                    </span>
                   </li>
                 ))}
               </ul>
               <Link
                 href={c.href}
-                className="block bg-black rounded-pill font-clash uppercase text-white text-center h-[48px]"
-                style={{ lineHeight: "48px", fontSize: 16, letterSpacing: "0.8px" }}
+                className="tap-press block bg-black rounded-pill font-clash uppercase text-white text-center inline-flex items-center justify-center w-full"
+                style={{ minHeight: 52, fontSize: 14, letterSpacing: "0.9px", fontWeight: 500 }}
               >
                 Schedule Now
               </Link>

@@ -31,14 +31,18 @@ export default function Testimonial() {
             className="block mx-auto"
           />
         </ScrollReveal>
-        {/* Quote body — line-by-line cascade */}
+        {/* Quote body — line-by-line cascade.
+            R4.A mobile pass: at mobile sizes (clamp's lower bound), 2px letter-spacing reads
+            airy and disconnected. The clamp-driven inline style overrode any sm: utility,
+            so we use CSS env() via `[--mobile-track:...]` and a media-query fallback in the
+            style attribute via the var. Simpler: bump the min size to 22 + use a CSS
+            variable expression for tracking that auto-shrinks at small sizes. */}
         <blockquote
-          className="font-spectral text-ink-body mx-auto [word-break:break-word]"
+          className="font-spectral text-ink-body mx-auto [word-break:break-word] [letter-spacing:0.4px] sm:[letter-spacing:2px]"
           style={{
             maxWidth: 860,
-            fontSize: "clamp(24px, 3.2vw, 40px)",
-            lineHeight: 1.18,
-            letterSpacing: "2px",
+            fontSize: "clamp(22px, 3.2vw, 40px)",
+            lineHeight: 1.35,
             fontWeight: 400,
           }}
         >

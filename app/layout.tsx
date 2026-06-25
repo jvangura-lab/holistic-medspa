@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Spectral, Manrope, Istok_Web, Archivo } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/motion/SmoothScroll";
+import { MotionReadyProvider } from "@/components/motion/MotionReady";
 
 // DESIGN_SYSTEM.md §2.2 — 5 font families (Spectral cousin-swap from Branch baked in).
 // Clash Display Variable loaded via Fontshare CDN @import in globals.css (not on Google Fonts).
@@ -66,6 +67,14 @@ export const metadata: Metadata = {
   icons: { icon: "/brand/favicon.svg" },
 };
 
+// R4.C: viewportFit 'cover' so iPhone notch safe-area insets work for mobile.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#ffffff",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -77,8 +86,13 @@ export default function RootLayout({
       className={`${spectral.variable} ${manrope.variable} ${istokWeb.variable} ${archivo.variable}`}
     >
       <body className="min-h-svh antialiased">
-        <SmoothScroll />
-        {children}
+        {/* R4.C: MotionReadyProvider gates all GSAP/Lenis motion until window 'load' +
+            document.fonts.ready + Lenis init resolve. Content renders immediately;
+            only motion is deferred. Reduced-motion users bypass instantly. */}
+        <MotionReadyProvider>
+          <SmoothScroll />
+          {children}
+        </MotionReadyProvider>
       </body>
     </html>
   );

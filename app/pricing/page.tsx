@@ -129,8 +129,8 @@ export default function PricingPage() {
       {/* PillBand header — DS image-band above pricing */}
       <section aria-label="Pricing intro band" className="relative w-full bg-white py-12 md:py-16">
         <PillBandQuote
-          src="/media/philosophy.jpg"
-          alt="Quiet pricing imagery — the practice on Bayou Lafourche."
+          src="/media/round-2/apothecary/apothecary-wooden-shelves-glass-jars-ingredients-rachelclaire.jpg"
+          alt="Wooden apothecary shelves lined with glass ingredient jars."
           quote="Honest prices, plainly listed."
           attribution="Holistic Medspa — Cut Off, Louisiana"
           scrimOpacity={0.6}
@@ -212,8 +212,8 @@ export default function PricingPage() {
             <div className="md:col-span-4 hidden md:flex items-center justify-end">
               <Reveal variant="mask" duration={900}>
                 <OvalCard
-                  src="/media/storefront.jpg"
-                  alt="The brown brick storefront in Cut Off."
+                  src="/media/round-2/bayou/pixabay-bayou-louisiana-3641416.jpg"
+                  alt="Cypress and reflections on a south-Louisiana bayou."
                   width={360}
                   height={260}
                 />
@@ -393,7 +393,7 @@ export default function PricingPage() {
       />
       <Footer />
       <StickyMobileBar />
-      <div className="md:hidden h-[56px]" aria-hidden />
+      <div className="md:hidden" aria-hidden style={{ height: "calc(64px + env(safe-area-inset-bottom))" }} />
     </main>
   );
 }

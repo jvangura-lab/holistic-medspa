@@ -72,7 +72,7 @@ export default function HomePage() {
         <Footer />
         <StickyMobileBar />
         {/* Mobile-bar bottom-padding spacer so footer copyright row clears the fixed sticky bar */}
-        <div className="md:hidden h-[56px]" aria-hidden />
+        <div className="md:hidden" aria-hidden style={{ height: "calc(64px + env(safe-area-inset-bottom))" }} />
       </main>
     </>
   );

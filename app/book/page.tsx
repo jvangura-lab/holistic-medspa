@@ -130,8 +130,8 @@ export default function BookPage() {
           <div className="md:col-span-4 md:sticky md:top-24">
             <Reveal variant="mask" duration={1000}>
               <OvalCard
-                src="/media/storefront.jpg"
-                alt="The Holistic Medspa storefront on West Main."
+                src="/media/round-2/waiting-room/pexels-warm-toned-wooden-chairs-waiting-area-34688847.jpg"
+                alt="A warm-toned waiting area with wooden chairs, a window, and an indoor plant."
                 width={420}
                 height={520}
                 className="mx-auto"
@@ -179,7 +179,7 @@ export default function BookPage() {
         className="relative w-full bg-ink-deep text-white py-20 md:py-28 overflow-hidden"
       >
         <Image
-          src="/media/services/service-bach-flowers.jpg"
+          src="/media/round-2/tea/pexels-herbal-tea-glass-cup-wooden-tray-36995592.jpg"
           alt=""
           fill
           sizes="100vw"
@@ -224,7 +224,7 @@ export default function BookPage() {
 
       <Footer />
       <StickyMobileBar />
-      <div className="md:hidden h-[56px]" aria-hidden />
+      <div className="md:hidden" aria-hidden style={{ height: "calc(64px + env(safe-area-inset-bottom))" }} />
     </main>
   );
 }
