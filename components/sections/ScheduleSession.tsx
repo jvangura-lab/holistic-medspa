@@ -123,8 +123,8 @@ export default function ScheduleSession() {
             style={{ left: "calc(41.67% + 72.33px)", top: 0, width: 712, height: 665 }}
           >
             <Image
-              src="/media/philosophy.jpg"
-              alt="A look at the apothecary at Holistic Medspa"
+              src="/media/round-2/apothecary/pexels-classic-apothecary-jars-wooden-shelf-30175087.jpg"
+              alt="Classic apothecary jars lined up on a wooden shelf in dim warm light."
               fill
               sizes="712px"
               className="object-cover"
@@ -136,8 +136,8 @@ export default function ScheduleSession() {
         <div className="md:hidden">
           <div className="relative w-full h-[280px] mb-8 overflow-hidden">
             <Image
-              src="/media/philosophy.jpg"
-              alt="A look at the apothecary at Holistic Medspa"
+              src="/media/round-2/apothecary/pexels-classic-apothecary-jars-wooden-shelf-30175087.jpg"
+              alt="Classic apothecary jars lined up on a wooden shelf in dim warm light."
               fill
               sizes="100vw"
               className="object-cover"
