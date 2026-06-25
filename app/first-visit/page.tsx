@@ -71,7 +71,7 @@ export default function FirstVisitPage() {
       <main className="relative bg-white brand-loader">
         <Header />
         <ServiceHero
-          headline="What to expect, what to bring, and the small ways we keep your first hour calm."
+          headline="Your first hour, unhurried."
           sub="Holistic Medspa is a one-person practice. Toya greets you, listens, and walks you through your first session at your pace — never a clipboard speed-run."
           image="/media/first-visit/first-visit-step-cypress.jpg"
           imageAlt="The clinic interior at Holistic Medspa, Cut Off, Louisiana."

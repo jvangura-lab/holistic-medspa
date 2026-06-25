@@ -76,7 +76,7 @@ export default function AboutPage() {
       <main className="relative bg-white brand-loader">
         <Header />
         <ServiceHero
-          headline="A small wellness clinic on Bayou Lafourche."
+          headline="Rooted in the bayou."
           sub="Founded in 2020 in a parking lot. Now in a brown brick storefront on West Main Street, Cut Off — quietly rebuilding under a new name."
           image="/media/about/about-hero-image.jpg"
           imageAlt="The storefront at Holistic Medspa, Cut Off, Louisiana."

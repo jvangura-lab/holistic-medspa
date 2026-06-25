@@ -115,7 +115,7 @@ export default function PricingPage() {
     <main className="relative bg-white brand-loader">
       <Header />
       <ServiceHero
-        headline="Honest, mostly historical, and always confirmable by phone."
+        headline="Honest prices, plainly listed."
         sub="A consolidated view of every published price we have for the services on the current menu. Toya is mid-rebrand and current rates may differ — call or text (985) 278-6087 to confirm before booking."
         image="/media/services/service-essential-oils.jpg"
         imageAlt="The retail shelves at Holistic Medspa, Cut Off, Louisiana."

@@ -84,7 +84,7 @@ export default function Hero() {
             fontWeight: 400,
           }}
         >
-          A small wellness clinic on Bayou Lafourche.
+          Mind · Body · Soul.
         </h1>
 
         {/* Hero portrait ellipse: 559×335, rounded-306.5, 10px solid dusty-rose #c08181 border,
@@ -162,13 +162,13 @@ export default function Hero() {
           <h1
             className="absolute font-spectral text-white px-5 bottom-[180px] [word-break:break-word]"
             style={{
-              fontSize: "44px",
-              lineHeight: "48px",
-              letterSpacing: "-2.2px",
+              fontSize: "56px",
+              lineHeight: "60px",
+              letterSpacing: "-2.4px",
               fontWeight: 400,
             }}
           >
-            A small wellness clinic on Bayou Lafourche.
+            Mind · Body · Soul.
           </h1>
           <div className="absolute bottom-6 left-5 right-5 flex items-center gap-3 flex-wrap">
             <Link

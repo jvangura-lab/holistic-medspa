@@ -70,7 +70,7 @@ export const SERVICES: ServiceSpec[] = [
       "A bioenergetic ZYTO Balancer scan with Toya in Cut Off, Louisiana. A 20-page snapshot of where your body's stress signals are loudest right now. Not a diagnosis — a starting map.",
     primaryKeyword: "ZYTO scan Louisiana",
     hero: {
-      headline: "A 20-page snapshot of where your body's stress signals are loudest right now.",
+      headline: "A snapshot of your body's signals.",
       sub: "Not a diagnosis. A starting map.",
       image: "/media/services/service-naturopathy-consultation.jpg",
     },
@@ -147,7 +147,7 @@ export const SERVICES: ServiceSpec[] = [
       "A 30-minute Lymphstar Pro lymphatic drainage session with Toya at Holistic Medspa, Cut Off, Louisiana. Gentle sound-and-vibration lymph work — by appointment.",
     primaryKeyword: "lymphatic drainage Cut Off LA",
     hero: {
-      headline: "A half-hour of gentle, sound-and-vibration lymph work that lets your body do the rest of the moving on its own.",
+      headline: "Gentle. Quiet. Restorative.",
       sub: "Lymphstar Pro session at the Cut Off clinic, by appointment.",
       image: "/media/services/service-lymphatic-drainage.jpg",
     },
@@ -222,7 +222,7 @@ export const SERVICES: ServiceSpec[] = [
       "Milly's Minutes: $1 per minute across infrared sauna, vibra plate, and ionic foot bath. Use the time however you need it that day. At Holistic Medspa in Cut Off, Louisiana.",
     primaryKeyword: "infrared sauna Cut Off LA",
     hero: {
-      headline: "One dollar a minute. Three modalities. Use the time however you need it that day.",
+      headline: "One dollar a minute. Three modalities.",
       sub: "Infrared sauna, vibra plate, ionic foot bath — booked by the minute, in the proportions you choose.",
       image: "/media/services/service-millys-minutes.jpg",
     },
@@ -295,7 +295,7 @@ export const SERVICES: ServiceSpec[] = [
       "Hosted full-body thermography clinic at Holistic Medspa in Cut Off, Louisiana, with visiting certified thermographer Sandy Cambre. Radiation-free thermal imaging — adjunctive only, never a replacement for mammography.",
     primaryKeyword: "thermography Cut Off LA",
     hero: {
-      headline: "A radiation-free, contact-free thermal-imaging session you can think of as a complement to your existing screening routine — never a replacement for it.",
+      headline: "Radiation-free thermal imaging.",
       sub: "Hosted clinic at our Cut Off location, run a few times a year by visiting certified thermographer Sandy Cambre.",
       image: "/media/services/service-thermography.jpg",
     },
@@ -448,7 +448,7 @@ export const SERVICES: ServiceSpec[] = [
       "A gentle Bach Flower consultation at Holistic Medspa in Cut Off, Louisiana. Custom-blended plant remedies for emotional balance — not a substitute for medical or mental-health care.",
     primaryKeyword: "Bach flower consultation Louisiana",
     hero: {
-      headline: "A gentle, plant-based system for working with emotional weather. We blend a small bottle for you, and you take it home.",
+      headline: "A small bottle for emotional weather.",
       sub: "A short consultation and a custom Bach Flower blend at the Cut Off clinic.",
       image: "/media/services/service-bach-flowers.jpg",
     },

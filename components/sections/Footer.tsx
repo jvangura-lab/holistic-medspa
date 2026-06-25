@@ -55,6 +55,21 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* Wavy SVG divider — fills with the dark PANEL 2 color, rises up into the cream CTA panel
+          to create the wave-rim transition shown in the design reference. Decorative; aria-hidden. */}
+      <svg
+        viewBox="0 0 1600 100"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        className="block w-full h-[50px] md:h-[100px] -mb-px"
+        style={{ display: "block" }}
+      >
+        <path
+          d="M0,55 C266,5 533,95 800,45 C1066,-5 1333,85 1600,35 L1600,100 L0,100 Z"
+          fill="#1a1a1a"
+        />
+      </svg>
+
       {/* PANEL 2 — Dark footer with decorative rectangle104 SVG bg + links */}
       <div className="relative w-full bg-[#1a1a1a] text-white overflow-hidden">
         <Image
