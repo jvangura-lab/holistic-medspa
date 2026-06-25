@@ -72,7 +72,7 @@ export const SERVICES: ServiceSpec[] = [
     hero: {
       headline: "A snapshot of your body's signals.",
       sub: "Not a diagnosis. A starting map.",
-      image: "/media/round-2/clinic/pexels-minimalist-medical-exam-room-7789616.jpg",
+      image: "/media/services/service-naturopathy-consultation.jpg",
     },
     whatItIs: [
       "The ZYTO Balancer is a hand-scanner that measures the body's responses to a series of digital “stimulus” signals — roughly 200 of them — through a galvanic-skin-response cradle. You rest your hand on the scanner for the duration of the reading. The software then compiles those responses into a report covering six body-system categories.",

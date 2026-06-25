@@ -109,8 +109,8 @@ export default function FirstVisitPage() {
             removing the visible whitespace gap reported under "We do not rush first visits.") */}
         <section aria-label="A note on pace" className="relative w-full bg-white pt-12 md:pt-16 pb-4 md:pb-6">
           <PillBandQuote
-            src="/media/round-2/tea/pexels-rustic-herbal-tea-wooden-board-34705969.jpg"
-            alt="A variety of herbal teas displayed on wooden spoons against a rustic backdrop."
+            src="/media/services/service-bach-flowers.jpg"
+            alt="Bach flower remedies — small bottles of plant-based blends at the Cut Off clinic."
             quote="We do not rush first visits."
             attribution="Holistic Medspa — by appointment"
             scrimOpacity={0.55}

@@ -102,7 +102,7 @@ export default function StayConnected() {
           {/* TILE 3: Become a Member — masked image + 80% #0e0f14 overlay */}
           <div className="relative overflow-hidden rounded-[28px]" style={{ width: 420, height: 324 }}>
             <Image
-              src="/media/round-2/bayou/pixabay-bayou-swamp-285818.jpg"
+              src="/media/hero-poster.jpg"
               alt=""
               fill
               sizes="420px"
@@ -182,7 +182,7 @@ export default function StayConnected() {
                 },
                 {
                   title: "Become a Member",
-                  bg: "/media/round-2/bayou/pixabay-bayou-swamp-285818.jpg",
+                  bg: "/media/hero-poster.jpg",
                   overlay: "bg-overlay/75",
                   body: "Returning clients since 2020. Ask Toya about ongoing care.",
                   href: "/contact",

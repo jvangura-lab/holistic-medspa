@@ -124,7 +124,7 @@ export default function ScheduleSession() {
             style={{ left: "calc(41.67% + 72.33px)", top: 0, width: 712, height: 665 }}
           >
             <Image
-              src="/media/round-2/apothecary/pexels-classic-apothecary-jars-wooden-shelf-30175087.jpg"
+              src="/media/philosophy.jpg"
               alt="Classic apothecary jars lined up on a wooden shelf in dim warm light."
               fill
               sizes="712px"
@@ -205,7 +205,7 @@ export default function ScheduleSession() {
           {/* Image becomes a trust anchor BELOW the form — smaller, no longer blocks action */}
           <div className="relative w-full h-[200px] mt-10 overflow-hidden rounded-[20px]">
             <Image
-              src="/media/round-2/apothecary/pexels-classic-apothecary-jars-wooden-shelf-30175087.jpg"
+              src="/media/philosophy.jpg"
               alt="Classic apothecary jars lined up on a wooden shelf in dim warm light."
               fill
               sizes="100vw"

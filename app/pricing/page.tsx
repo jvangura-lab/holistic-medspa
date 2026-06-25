@@ -129,8 +129,8 @@ export default function PricingPage() {
       {/* PillBand header — DS image-band above pricing */}
       <section aria-label="Pricing intro band" className="relative w-full bg-white py-12 md:py-16">
         <PillBandQuote
-          src="/media/round-2/apothecary/apothecary-wooden-shelves-glass-jars-ingredients-rachelclaire.jpg"
-          alt="Wooden apothecary shelves lined with glass ingredient jars."
+          src="/media/philosophy.jpg"
+          alt="A quiet corner of the practice on Bayou Lafourche."
           quote="Honest prices, plainly listed."
           attribution="Holistic Medspa — Cut Off, Louisiana"
           scrimOpacity={0.6}
@@ -212,8 +212,8 @@ export default function PricingPage() {
             <div className="md:col-span-4 hidden md:flex items-center justify-end">
               <Reveal variant="mask" duration={900}>
                 <OvalCard
-                  src="/media/round-2/bayou/pixabay-bayou-louisiana-3641416.jpg"
-                  alt="Cypress and reflections on a south-Louisiana bayou."
+                  src="/media/storefront.jpg"
+                  alt="The Holistic Medspa storefront on West Main Street, Cut Off, Louisiana."
                   width={360}
                   height={260}
                 />

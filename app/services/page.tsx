@@ -98,7 +98,7 @@ export default function ServicesIndexPage() {
             >
               <div className="absolute inset-0 bg-black rounded-pill" />
               <Image
-                src="/media/round-2/spa/burst-all-natural-spa-decorations.jpg"
+                src="/media/figma-slots/sessions-band-bg.jpg"
                 alt=""
                 fill
                 sizes="1300px"
@@ -123,7 +123,7 @@ export default function ServicesIndexPage() {
             <div className="relative h-[140px] rounded-[28px] overflow-hidden">
               <div className="absolute inset-0 bg-black" />
               <Image
-                src="/media/round-2/spa/burst-all-natural-spa-decorations.jpg"
+                src="/media/figma-slots/sessions-band-bg.jpg"
                 alt=""
                 fill
                 sizes="100vw"
