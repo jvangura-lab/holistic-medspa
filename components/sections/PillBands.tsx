@@ -1,37 +1,101 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { registerEases } from "@/lib/motion/eases";
+import { prefersReducedMotion } from "@/lib/motion/prefersReducedMotion";
 import SplitText from "@/components/motion/SplitText";
 
 /**
  * Three sticky-stacking pill bands — Figma nodes 125:273, 125:280, 125:287.
  * Source: research/references/figma-ds/design-context/sections-mid-NEW.tsx
  *
- * In Figma source: all three bands live inside one outer container at absolute y-positions
- * 1212 / 1670 / 2253, each marked `sticky top-0` so they stack as the user scrolls.
+ * R3.C MOTION REDO — stacking-card overlap (owner's headline deliverable):
+ *   - Each band is its own pin window (`ScrollTrigger pin: true`, end: "+=100%")
+ *   - z-index ascends 1 → 2 → 3 so band N overlays bands < N
+ *   - As band 3 (Services) exits its pin window, opacity ramps 1 → 0 (scrub) so
+ *     the stack fades into the next section — owner's "fade into next section
+ *     with transparency" requirement.
+ *   - H2 word reveal triggers per-band as each enters its pin window.
  *
- * Reproduction approach: a relative wrapper with explicit height (1739px) containing 3
- * `.sticky-band` cards anchored at their Figma y-offsets via top values. Each card preserves
- * the rounded-pill 50px radius, 1300×N dimensions, fill+overlay treatment, and Spectral
- * 80px white label per DS §3.2.
+ * Mobile: natural-flow stack (no sticky pinning — mobile interaction model is scroll, not stack).
  *
- * Labels: HM CONTENT.md uses "Sessions" / "Treatments" / "Services" terminology — we map
- * the Figma "Services/Treatments/Sessions" labels (template-default) to the HM-equivalent
- * proper names: Sessions, Treatments, Services per IA §1 (sitemap).
+ * Reduced-motion: pin behavior is skipped entirely (the .stack-host wrapper
+ * collapses to natural flow with the 3 bands stacked vertically).
  */
 export default function PillBands() {
+  const stackRef = useRef<HTMLDivElement | null>(null);
+  const band1Ref = useRef<HTMLDivElement | null>(null);
+  const band2Ref = useRef<HTMLDivElement | null>(null);
+  const band3Ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (prefersReducedMotion()) return;
+    if (window.innerWidth < 768) return; // mobile uses natural flow
+    const stack = stackRef.current;
+    const b1 = band1Ref.current;
+    const b2 = band2Ref.current;
+    const b3 = band3Ref.current;
+    if (!stack || !b1 || !b2 || !b3) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+    registerEases();
+
+    const ctx = gsap.context(() => {
+      const bands = [b1, b2, b3];
+
+      bands.forEach((band, idx) => {
+        // Pin each band for one viewport-height of scroll. Band N covers band N-1
+        // because z-index ascends (set inline below in JSX). The pinSpacing of each
+        // pin adds the scroll distance, so the parent total height grows organically.
+        ScrollTrigger.create({
+          trigger: band,
+          start: "top top",
+          end: "+=100%",
+          pin: true,
+          pinSpacing: true,
+          anticipatePin: 1,
+        });
+      });
+
+      // Final band (Services) opacity ramp 1 → 0 during the LAST 35% of its pin window,
+      // so the whole stack fades into next section.
+      gsap.to([b1, b2, b3], {
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: b3,
+          start: "top+=65% top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      // Refresh after layout has settled (fonts, images).
+      const refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 200);
+      return () => window.clearTimeout(refreshTimer);
+    }, stack);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
       aria-label="What we offer — sessions, treatments, services"
       className="relative w-full bg-white"
     >
-      {/* Desktop sticky-stacking layout — 1739px tall wrapper at 1600 canvas */}
-      <div className="hidden md:block relative mx-auto w-full max-w-[1600px]" style={{ height: 1739 }}>
+      {/* Desktop sticky-stacking layout — pin-based, parent grows to fit pinSpacing of 3 bands */}
+      <div ref={stackRef} className="hidden md:block relative mx-auto w-full max-w-[1600px]">
 
-        {/* BAND 1: Sessions — h=458, top=0 (Figma top=1212 inside outer page) */}
-        <div className="sticky top-0 contents pointer-events-auto" data-band="sessions">
+        {/* BAND 1: Sessions — z-1 (gets covered by band 2 + 3) */}
+        <div ref={band1Ref} className="relative w-full" style={{ height: "100vh", zIndex: 1 }}>
           <div
-            className="absolute h-[458px] rounded-pill overflow-hidden"
-            style={{ left: "50%", top: 0, width: 1300, transform: "translateX(-50%)" }}
+            className="absolute h-[458px] rounded-pill overflow-hidden left-1/2 -translate-x-1/2"
+            style={{ top: "calc(50vh - 229px)", width: 1300 }}
           >
             <div className="absolute inset-0 bg-black rounded-pill" />
             <Image
@@ -44,7 +108,7 @@ export default function PillBands() {
             <h2
               className="absolute font-spectral text-white"
               style={{
-                left: 235 - 0,
+                left: 235,
                 top: 57,
                 fontSize: 80,
                 lineHeight: "80px",
@@ -52,7 +116,7 @@ export default function PillBands() {
                 fontWeight: 400,
               }}
             >
-              <SplitText text="Sessions" stagger={120} duration={800} />
+              <SplitText text="Sessions" mode="words" stagger={0.08} duration={0.95} start="top 80%" />
             </h2>
             <Link
               href="/services"
@@ -72,11 +136,11 @@ export default function PillBands() {
           </div>
         </div>
 
-        {/* BAND 2: Treatments — h=583, top=458 (Figma 1670) */}
-        <div className="sticky top-0 contents pointer-events-auto" data-band="treatments">
+        {/* BAND 2: Treatments — z-2 (covers band 1) */}
+        <div ref={band2Ref} className="relative w-full" style={{ height: "100vh", zIndex: 2 }}>
           <div
-            className="absolute h-[583px] rounded-pill overflow-hidden"
-            style={{ left: "50%", top: 458, width: 1300, transform: "translateX(-50%)" }}
+            className="absolute h-[583px] rounded-pill overflow-hidden left-1/2 -translate-x-1/2"
+            style={{ top: "calc(50vh - 291px)", width: 1300 }}
           >
             <div className="absolute inset-0 bg-black rounded-pill" />
             <Image
@@ -97,7 +161,7 @@ export default function PillBands() {
                 fontWeight: 400,
               }}
             >
-              <SplitText text="Treatments" stagger={120} duration={800} />
+              <SplitText text="Treatments" mode="words" stagger={0.08} duration={0.95} start="top 80%" />
             </h2>
             <Link
               href="/services"
@@ -116,11 +180,11 @@ export default function PillBands() {
           </div>
         </div>
 
-        {/* BAND 3: Services — h=698, top=1041 (Figma 2253), warm-brown bg + rectangle7 (no opacity reduction) */}
-        <div className="sticky top-0 contents pointer-events-auto" data-band="services">
+        {/* BAND 3: Services — z-3 (covers bands 1 & 2), warm-brown bg */}
+        <div ref={band3Ref} className="relative w-full" style={{ height: "100vh", zIndex: 3 }}>
           <div
-            className="absolute h-[698px] rounded-pill overflow-hidden"
-            style={{ left: "50%", top: 1041, width: 1300, transform: "translateX(-50%)" }}
+            className="absolute h-[698px] rounded-pill overflow-hidden left-1/2 -translate-x-1/2"
+            style={{ top: "calc(50vh - 349px)", width: 1300 }}
           >
             <div className="absolute inset-0 bg-brown rounded-pill" />
             <Image
@@ -141,7 +205,7 @@ export default function PillBands() {
                 fontWeight: 400,
               }}
             >
-              <SplitText text="Services" stagger={120} duration={800} />
+              <SplitText text="Services" mode="words" stagger={0.08} duration={0.95} start="top 80%" />
             </h2>
             <Link
               href="/services"

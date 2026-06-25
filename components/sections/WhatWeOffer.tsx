@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Reveal from "@/components/motion/Reveal";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 import SplitText from "@/components/motion/SplitText";
 
 /**
@@ -80,7 +80,7 @@ export default function WhatWeOffer() {
       <div className="mx-auto w-full max-w-[1600px] px-5 md:px-0">
         {/* H2 — Spectral 80px ink-h2, leading 80, tracking -3.2px, at left=148 (desktop) */}
         <h2
-          className="font-spectral text-ink-h2 mb-12 md:mb-16 md:ml-[148px] [word-break:break-word]"
+          className="font-spectral text-ink-h2 mb-12 md:mb-16 md:ml-[148px] [word-break:break-word] overflow-hidden"
           style={{
             fontSize: "clamp(40px, 6vw, 80px)",
             lineHeight: "1.05",
@@ -88,13 +88,21 @@ export default function WhatWeOffer() {
             fontWeight: 400,
           }}
         >
-          <SplitText text="What we offer" stagger={100} duration={800} />
+          <SplitText text="What we offer" mode="words" stagger={0.08} duration={0.9} start="top 82%" yFrom={110} />
         </h2>
 
         {/* Desktop: 4×2 grid centered within 1300 container */}
         <ul className="hidden md:grid grid-cols-4 gap-x-[40px] gap-y-[60px] mx-auto" style={{ maxWidth: 1300, paddingLeft: 0, paddingRight: 0 }}>
           {cards.map((c, idx) => (
-            <Reveal as="li" variant="slide" direction="up" delay={(idx % 4) * 80} duration={700} key={c.title} className="group">
+            <ScrollReveal
+              as="li"
+              variant="lift"
+              delay={(idx % 4) * 0.08}
+              duration={0.8}
+              start="top 82%"
+              key={c.title}
+              className="group"
+            >
               <Link href={c.href} className="block">
                 <div className="mb-6" style={{ width: c.iconSize, height: c.iconSize }}>
                   <Image
@@ -129,7 +137,7 @@ export default function WhatWeOffer() {
                   </span>
                 </div>
               </Link>
-            </Reveal>
+            </ScrollReveal>
           ))}
         </ul>
 

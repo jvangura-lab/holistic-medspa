@@ -1,96 +1,117 @@
 "use client";
 
-import { useEffect, useRef, useState, type ElementType } from "react";
+import { useEffect, useRef, type ElementType, type CSSProperties, type ReactNode } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SplitType from "split-type";
+import { registerEases } from "@/lib/motion/eases";
+import { prefersReducedMotion } from "@/lib/motion/prefersReducedMotion";
+
+type SplitMode = "chars" | "words" | "lines";
 
 /**
- * SplitText — lightweight DOM-split word cascade on viewport enter.
+ * SplitText — text-splitting animation (owner motion req #5).
  *
- * No GSAP licensing required. Splits text into word spans with inline-block display.
- * Each word: opacity 0 → 1 + translateY(40%) → 0 with stagger 60ms / word.
- * Per-word duration 700ms, easing cubic-bezier(0.22, 1, 0.36, 1) "veil".
+ * Splits text via split-type (free MIT alternative to GSAP SplitText) into chars,
+ * words, or lines. Each fragment animates from below + opacity 0 with cascade stagger.
  *
- * Honors prefers-reduced-motion: renders text statically, no transitions.
+ * Triggers via GSAP ScrollTrigger when text enters viewport. For hero / above-the-fold
+ * use trigger="immediate" to fire on mount without scroll dependency.
+ *
+ * Honors prefers-reduced-motion: renders static, no animation.
  */
 export default function SplitText({
   text,
+  children,
+  mode = "words",
   className = "",
   style,
   as: Tag = "span",
-  stagger = 60,
-  duration = 700,
+  stagger = 0.06,
+  duration = 1.0,
   delay = 0,
+  start = "top 85%",
+  immediate = false,
+  yFrom = 100,
 }: {
-  text: string;
+  text?: string;
+  children?: ReactNode;
+  mode?: SplitMode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   as?: ElementType;
   stagger?: number;
   duration?: number;
   delay?: number;
+  start?: string;
+  immediate?: boolean;
+  yFrom?: number;
 }) {
   const ref = useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }, []);
-
-  useEffect(() => {
-    if (reducedMotion) {
-      setVisible(true);
-      return;
-    }
     const node = ref.current;
     if (!node) return;
-    const obs = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            setVisible(true);
-            obs.unobserve(e.target);
-          }
-        }
-      },
-      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
-    );
-    obs.observe(node);
-    return () => obs.disconnect();
-  }, [reducedMotion]);
+    if (prefersReducedMotion()) return;
 
-  const words = text.split(/(\s+)/);
-  const ease = "cubic-bezier(0.22, 1, 0.36, 1)";
+    gsap.registerPlugin(ScrollTrigger);
+    registerEases();
+
+    // Split the text. split-type mutates the DOM in place, wrapping fragments in spans.
+    const split = new SplitType(node, {
+      types: mode === "lines" ? "lines" : mode === "chars" ? "chars,words" : "words",
+      tagName: "span",
+    });
+
+    const targets =
+      mode === "chars"
+        ? (split.chars ?? [])
+        : mode === "lines"
+        ? (split.lines ?? [])
+        : (split.words ?? []);
+
+    if (targets.length === 0) return;
+
+    // Inline-block + overflow needed so y translate doesn't clip outside line box
+    targets.forEach((el) => {
+      const e = el as HTMLElement;
+      e.style.display = "inline-block";
+      e.style.willChange = "transform, opacity";
+    });
+
+    gsap.set(targets, { yPercent: yFrom, opacity: 0 });
+
+    const tween = gsap.to(targets, {
+      yPercent: 0,
+      opacity: 1,
+      duration,
+      delay,
+      ease: "expo-out",
+      stagger,
+      ...(immediate
+        ? {}
+        : {
+            scrollTrigger: {
+              trigger: node,
+              start,
+              toggleActions: "play none none none",
+            },
+          }),
+    });
+
+    return () => {
+      tween.kill();
+      ScrollTrigger.getAll()
+        .filter((t) => t.trigger === node)
+        .forEach((t) => t.kill());
+      split.revert();
+    };
+  }, [text, mode, stagger, duration, delay, start, immediate, yFrom]);
 
   const Component = Tag as ElementType;
   return (
     <Component ref={ref} className={className} style={style} aria-label={text}>
-      {words.map((w, i) => {
-        if (/^\s+$/.test(w)) {
-          return <span key={i}>{w}</span>;
-        }
-        // Cap visual stagger so very long headlines do not drag (mask after 12 words)
-        const idx = Math.min(Math.floor(i / 2), 12);
-        const transform = visible || reducedMotion ? "translateY(0)" : "translateY(50%)";
-        const opacity = visible || reducedMotion ? 1 : 0;
-        return (
-          <span
-            key={i}
-            aria-hidden
-            style={{
-              display: "inline-block",
-              opacity,
-              transform,
-              transition: reducedMotion
-                ? "none"
-                : `opacity ${duration}ms ${ease} ${delay + idx * stagger}ms, transform ${duration}ms ${ease} ${delay + idx * stagger}ms`,
-              willChange: visible ? undefined : "opacity, transform",
-            }}
-          >
-            {w}
-          </span>
-        );
-      })}
+      {text ?? children}
     </Component>
   );
 }

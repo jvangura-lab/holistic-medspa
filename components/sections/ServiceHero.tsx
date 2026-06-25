@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import SplitText from "@/components/motion/SplitText";
-import Reveal from "@/components/motion/Reveal";
+import ScrollReveal from "@/components/motion/ScrollReveal";
+import ScrollScrub from "@/components/motion/ScrollScrub";
+import MagneticHover from "@/components/motion/MagneticHover";
 
 /**
  * ServiceHero — reduced-height hero (480px desktop / 380px mobile) per DESIGN_SYSTEM.md §5.1
@@ -37,15 +39,23 @@ export default function ServiceHero({
     >
       {/* DESKTOP — 480px band, flow-based layout (anchored bottom; no fixed-y overlap) */}
       <div className="hidden md:block relative mx-auto h-[480px] w-full max-w-[1600px]">
-        <div className="absolute inset-0">
-          <Image
-            src={image}
-            alt={imageAlt}
-            fill
-            sizes="(max-width: 1600px) 100vw, 1600px"
-            priority
-            className="object-cover pointer-events-none"
-          />
+        <div className="absolute inset-0 overflow-hidden">
+          <ScrollScrub
+            to={{ y: 60 }}
+            start="top top"
+            end="bottom top"
+            scrub={1}
+            className="absolute inset-0"
+          >
+            <Image
+              src={image}
+              alt={imageAlt}
+              fill
+              sizes="(max-width: 1600px) 100vw, 1600px"
+              priority
+              className="object-cover pointer-events-none"
+            />
+          </ScrollScrub>
           <div
             aria-hidden
             className="absolute inset-0"
@@ -59,7 +69,7 @@ export default function ServiceHero({
         {/* Flow stack — pinned to bottom-left with 60px bottom padding, content stacks naturally */}
         <div className="absolute inset-x-0 bottom-[60px] left-[150px] right-[150px] flex flex-col gap-6 max-w-[1100px]">
           <h1
-            className="font-spectral not-italic text-white [word-break:break-word]"
+            className="font-spectral not-italic text-white [word-break:break-word] overflow-hidden"
             style={{
               fontSize: "clamp(48px, 5.5vw, 72px)",
               lineHeight: 1.05,
@@ -67,14 +77,14 @@ export default function ServiceHero({
               fontWeight: 400,
             }}
           >
-            <SplitText text={headline} stagger={80} duration={800} />
+            <SplitText text={headline} mode="words" stagger={0.08} duration={0.95} immediate yFrom={120} />
           </h1>
 
           {sub ? (
-            <Reveal
-              variant="fade"
-              delay={350}
-              duration={700}
+            <ScrollReveal
+              variant="lift"
+              delay={0.35}
+              duration={0.75}
               as="p"
               className="font-manrope text-white/85 [word-break:break-word]"
               style={{
@@ -86,18 +96,20 @@ export default function ServiceHero({
               }}
             >
               {sub}
-            </Reveal>
+            </ScrollReveal>
           ) : null}
 
           <div className="flex items-center gap-6 flex-wrap">
-            <Link
-              href={ctaHref}
-              className="h-[50px] w-[200px] rounded-pill border-2 border-solid border-mint transition-[filter] duration-150 hover:brightness-95 flex items-center justify-center font-clash text-mint uppercase"
-              style={{ fontSize: 16, letterSpacing: "0.8px" }}
-              aria-label={ctaLabel}
-            >
-              {ctaLabel}
-            </Link>
+            <MagneticHover strength={12} className="inline-block">
+              <Link
+                href={ctaHref}
+                className="h-[50px] w-[200px] rounded-pill border-2 border-solid border-mint transition-[filter] duration-150 hover:brightness-95 flex items-center justify-center font-clash text-mint uppercase"
+                style={{ fontSize: 16, letterSpacing: "0.8px" }}
+                aria-label={ctaLabel}
+              >
+                {ctaLabel}
+              </Link>
+            </MagneticHover>
             {showPhone ? (
               <a
                 href="tel:9852786087"
@@ -131,7 +143,7 @@ export default function ServiceHero({
         />
         <div className="absolute inset-x-0 bottom-5 left-0 right-0 px-5 flex flex-col gap-4">
           <h1
-            className="font-spectral text-white [word-break:break-word]"
+            className="font-spectral text-white [word-break:break-word] overflow-hidden"
             style={{
               fontSize: "32px",
               lineHeight: "36px",
@@ -139,7 +151,7 @@ export default function ServiceHero({
               fontWeight: 400,
             }}
           >
-            <SplitText text={headline} stagger={60} duration={700} />
+            <SplitText text={headline} mode="words" stagger={0.06} duration={0.8} immediate yFrom={110} />
           </h1>
           {sub ? (
             <p

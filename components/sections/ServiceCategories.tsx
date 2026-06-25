@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Reveal from "@/components/motion/Reveal";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
 /**
  * Service Categories — DS §5 extension rule replacing Figma's 3-tier pricing.
@@ -104,11 +104,12 @@ export default function ServiceCategories() {
         {/* Desktop: 4-col row (extension from Figma 3-col, kept at 420w each) */}
         <ul className="hidden md:grid gap-x-5 gap-y-8 mx-auto" style={{ gridTemplateColumns: "repeat(4, 1fr)", maxWidth: 1740 }}>
           {cards.map((c, idx) => (
-            <Reveal
+            <ScrollReveal
               as="li"
-              variant="fade"
-              delay={idx * 110}
-              duration={750}
+              variant="lift"
+              delay={idx * 0.11}
+              duration={0.8}
+              start="top 82%"
               key={c.title}
               className="relative backdrop-blur-[5px] flex flex-col"
               style={{
@@ -168,7 +169,7 @@ export default function ServiceCategories() {
               >
                 Schedule Now
               </Link>
-            </Reveal>
+            </ScrollReveal>
           ))}
         </ul>
 
