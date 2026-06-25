@@ -87,13 +87,16 @@ export default function AboutPage() {
           ctaLabel="Request Consult"
         />
 
-        {/* The 2020 beginning — cream band */}
+        {/* The 2020 beginning — cream band
+            (R3.A: heading column widened from col-span-4 → col-span-5 and font-size capped
+            at 52px so the heading fits in ≤2 lines and doesn't leave a vertical whitespace
+            gap when wrapping to 3+ lines in a narrow column.) */}
         <section
           aria-label="The 2020 beginning"
           className="relative w-full bg-cream py-20 md:py-28"
         >
           <div className="mx-auto w-full max-w-[1600px] px-5 md:px-[150px] grid md:grid-cols-12 gap-10 md:gap-16">
-            <div className="md:col-span-4">
+            <div className="md:col-span-5">
               <p
                 className="font-clash uppercase text-mint mb-4"
                 style={{ fontSize: 13, letterSpacing: "0.7px", fontWeight: 500 }}
@@ -103,16 +106,16 @@ export default function AboutPage() {
               <h2
                 className="font-spectral text-ink-h2 [word-break:break-word]"
                 style={{
-                  fontSize: "clamp(40px, 5vw, 64px)",
+                  fontSize: "clamp(36px, 4vw, 52px)",
                   lineHeight: 1.05,
-                  letterSpacing: "-2.4px",
+                  letterSpacing: "-2px",
                   fontWeight: 400,
                 }}
               >
                 It started in a parking lot.
               </h2>
             </div>
-            <div className="md:col-span-8 space-y-6">
+            <div className="md:col-span-7 space-y-6">
               <p
                 className="font-manrope text-ink-body [word-break:break-word]"
                 style={{ fontSize: "clamp(17px, 1.4vw, 19px)", lineHeight: 1.65, letterSpacing: "-0.2px", fontWeight: 400 }}
@@ -172,7 +175,7 @@ export default function AboutPage() {
             className="object-cover opacity-20 pointer-events-none"
           />
           <div className="relative mx-auto w-full max-w-[1600px] px-5 md:px-[150px] grid md:grid-cols-12 gap-10 md:gap-16">
-            <div className="md:col-span-4">
+            <div className="md:col-span-5">
               <p
                 className="font-clash uppercase text-mint mb-4"
                 style={{ fontSize: 13, letterSpacing: "0.7px", fontWeight: 500 }}
@@ -182,16 +185,16 @@ export default function AboutPage() {
               <h2
                 className="font-spectral text-white [word-break:break-word]"
                 style={{
-                  fontSize: "clamp(40px, 5vw, 64px)",
+                  fontSize: "clamp(36px, 4vw, 52px)",
                   lineHeight: 1.05,
-                  letterSpacing: "-2.4px",
+                  letterSpacing: "-2px",
                   fontWeight: 400,
                 }}
               >
                 A move from herbal store to a fuller wellness clinic.
               </h2>
             </div>
-            <div className="md:col-span-8 space-y-6">
+            <div className="md:col-span-7 space-y-6">
               {/* "BEST CLIENTS in the World" anchor — single sitewide use */}
               <p
                 className="font-manrope text-white/85 [word-break:break-word]"
@@ -289,7 +292,7 @@ export default function AboutPage() {
           className="relative w-full bg-cream py-20 md:py-28"
         >
           <div className="mx-auto w-full max-w-[1600px] px-5 md:px-[150px] grid md:grid-cols-12 gap-10 md:gap-16">
-            <div className="md:col-span-4">
+            <div className="md:col-span-5">
               <p
                 className="font-clash uppercase text-mint mb-4"
                 style={{ fontSize: 13, letterSpacing: "0.7px", fontWeight: 500 }}
@@ -299,16 +302,16 @@ export default function AboutPage() {
               <h2
                 className="font-spectral text-ink-h2 [word-break:break-word]"
                 style={{
-                  fontSize: "clamp(34px, 4.4vw, 56px)",
+                  fontSize: "clamp(32px, 3.6vw, 48px)",
                   lineHeight: 1.05,
-                  letterSpacing: "-2px",
+                  letterSpacing: "-1.6px",
                   fontWeight: 400,
                 }}
               >
                 Several names, one practice.
               </h2>
             </div>
-            <div className="md:col-span-8 space-y-6">
+            <div className="md:col-span-7 space-y-6">
               <p
                 className="font-manrope text-ink-body [word-break:break-word]"
                 style={{ fontSize: "clamp(17px, 1.4vw, 19px)", lineHeight: 1.65, letterSpacing: "-0.2px", fontWeight: 400 }}

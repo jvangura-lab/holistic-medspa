@@ -1,17 +1,38 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 /**
  * Header — Figma nodeId 125:510
  * Source: research/references/figma-ds/design-context/header-125-510-NEW.tsx
  * Render: 1300×51 absolute children at top=21, left=150 of the 1600px page.
- * Sticky-overlay over the hero (z-50). Nav uses 5 owner-route links (Home/About/Services/Conditions/Contact)
- * matching Figma 1:1, with Holistic Medspa CONTENT.md routes wired in.
+ * Sticky-overlay over the hero (z-50). Nav uses 5 owner-route links (Home/About/Services/First Visit/Contact)
+ * with Holistic Medspa CONTENT.md routes wired in.
+ *
+ * Active-link logic (R3.A): pathname-aware via usePathname.
+ *   - "/" highlights only on exact match
+ *   - other routes highlight on prefix match (so /services/zyto-wellness-scan lights up "Services")
  *
  * Mobile (<md): collapses to wordmark + Book Now pill (hamburger reserved for F3.3 deeper routes).
  */
+
+const NAV_LINKS = [
+  { href: "/", label: "Home", left: 402 },
+  { href: "/about", label: "About", left: 525 },
+  { href: "/services", label: "Services", left: 649 },
+  { href: "/first-visit", label: "First Visit", left: 798 },
+  { href: "/contact", label: "Contact", left: 967 },
+] as const;
+
+function isActive(pathname: string, href: string): boolean {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export default function Header() {
+  const pathname = usePathname() ?? "/";
+
   return (
     <header className="absolute inset-x-0 top-0 z-50 pointer-events-none">
       {/* 1600-canvas frame; header inset 150 left/right; top 21 */}
@@ -23,7 +44,7 @@ export default function Header() {
             aria-label="Book Now"
             className="absolute bg-mint h-[51px] left-[1100px] rounded-pill top-0 w-[200px] transition-[filter] duration-150 hover:brightness-95 focus-visible:brightness-95"
           />
-          {/* Wordmark Holistic Medspa — Istok Web Bold 20px white (replacing Figma NUIQ placeholder) */}
+          {/* Wordmark Holistic Medspa — Istok Web Bold 20px white */}
           <Link
             href="/"
             className="absolute font-istok left-0 not-italic text-[20px] text-white top-[15px] whitespace-nowrap [word-break:break-word] leading-[normal]"
@@ -31,43 +52,28 @@ export default function Header() {
           >
             Holistic Medspa
           </Link>
-          {/* Nav: 5 links, Clash Display, uppercase, tracking 0.8px, 16px white (active = mint) */}
-          <Link
-            href="/"
-            aria-current="page"
-            className="absolute font-clash left-[402px] not-italic text-mint top-[17px] uppercase whitespace-nowrap leading-[normal]"
-            style={{ fontSize: "16px", letterSpacing: "0.8px", fontWeight: 500 }}
-          >
-            Home
-          </Link>
-          <Link
-            href="/about"
-            className="absolute font-clash left-[525px] not-italic text-white top-[17px] uppercase whitespace-nowrap leading-[normal] transition-colors duration-150 hover:text-mint"
-            style={{ fontSize: "16px", letterSpacing: "0.8px", fontWeight: 400 }}
-          >
-            About
-          </Link>
-          <Link
-            href="/services"
-            className="absolute font-clash left-[649px] not-italic text-white top-[17px] uppercase whitespace-nowrap leading-[normal] transition-colors duration-150 hover:text-mint"
-            style={{ fontSize: "16px", letterSpacing: "0.8px", fontWeight: 400 }}
-          >
-            Services
-          </Link>
-          <Link
-            href="/first-visit"
-            className="absolute font-clash left-[798px] not-italic text-white top-[17px] uppercase whitespace-nowrap leading-[normal] transition-colors duration-150 hover:text-mint"
-            style={{ fontSize: "16px", letterSpacing: "0.8px", fontWeight: 400 }}
-          >
-            First Visit
-          </Link>
-          <Link
-            href="/contact"
-            className="absolute font-clash left-[967px] not-italic text-white top-[17px] uppercase whitespace-nowrap leading-[normal] transition-colors duration-150 hover:text-mint"
-            style={{ fontSize: "16px", letterSpacing: "0.8px", fontWeight: 400 }}
-          >
-            Contact
-          </Link>
+          {/* Nav: 5 links — pathname-aware active state */}
+          {NAV_LINKS.map((link) => {
+            const active = isActive(pathname, link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+                className={`absolute font-clash not-italic top-[17px] uppercase whitespace-nowrap leading-[normal] transition-colors duration-150 ${
+                  active ? "text-mint" : "text-white hover:text-mint"
+                }`}
+                style={{
+                  left: `${link.left}px`,
+                  fontSize: "16px",
+                  letterSpacing: "0.8px",
+                  fontWeight: active ? 500 : 400,
+                }}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           {/* Book Now label sits inside the green pill at left=1153 (1100+53 inset) */}
           <Link
             href="/book"

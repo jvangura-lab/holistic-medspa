@@ -346,14 +346,17 @@ export default async function ServiceDeepPage({ params }: Props) {
           </div>
         </section>
 
-        {/* 4. WHAT TO EXPECT — cream band, definition-list pattern */}
+        {/* 4. WHAT TO EXPECT — cream band, definition-list pattern
+            (R3.A: H2 mb tightened mb-10 md:mb-14 → mb-6 md:mb-8 and OvalCard wrap
+            mb-12 md:mb-16 → mb-8 md:mb-10 to eliminate the stacked whitespace gap
+            reported under "What to expect" on /services/millys-minutes.) */}
         <section
           aria-label="What to expect"
           className="relative w-full bg-cream py-20 md:py-28"
         >
           <div className="mx-auto w-full max-w-[1600px] px-5 md:px-[150px]">
             <h2
-              className="font-spectral text-ink-h2 mb-10 md:mb-14 [word-break:break-word]"
+              className="font-spectral text-ink-h2 mb-6 md:mb-8 [word-break:break-word]"
               style={{
                 fontSize: "clamp(40px, 5.4vw, 72px)",
                 lineHeight: 1.04,
@@ -364,7 +367,7 @@ export default async function ServiceDeepPage({ params }: Props) {
               What to expect
             </h2>
             {/* OvalCard — DS oval pattern with the service image */}
-            <div className="mb-12 md:mb-16">
+            <div className="mb-8 md:mb-10">
               <Reveal variant="mask" duration={950}>
                 <OvalCard
                   src={svc.hero.image}

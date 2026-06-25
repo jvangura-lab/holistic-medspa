@@ -104,8 +104,10 @@ export default function FirstVisitPage() {
           </div>
         </section>
 
-        {/* PillBand quote — DS image-band between numbered steps and the "Bring with you" block */}
-        <section aria-label="A note on pace" className="relative w-full bg-white py-12 md:py-16">
+        {/* PillBand quote — DS image-band between numbered steps and the "Bring with you" block
+            (R3.A: tightened pb so the quote sits flush against the next cream band,
+            removing the visible whitespace gap reported under "We do not rush first visits.") */}
+        <section aria-label="A note on pace" className="relative w-full bg-white pt-12 md:pt-16 pb-4 md:pb-6">
           <PillBandQuote
             src="/media/services/service-bach-flowers.jpg"
             alt="Quiet wellness imagery from the practice."
@@ -116,13 +118,15 @@ export default function FirstVisitPage() {
           />
         </section>
 
-        {/* What to bring + after-your-visit + small notes */}
+        {/* What to bring + after-your-visit + small notes
+            (R3.A: section pt and OvalCard wrap mb both tightened so the cream band
+            starts closer to the quote above, eliminating the reported gap.) */}
         <section
           aria-label="What to bring and what we ask"
-          className="relative w-full bg-cream py-20 md:py-28"
+          className="relative w-full bg-cream pt-12 md:pt-16 pb-20 md:pb-28"
         >
           {/* Oval image card on top of the "What to bring" band — DS pattern */}
-          <div className="mx-auto w-full max-w-[1300px] px-5 md:px-0 mb-12 md:mb-16">
+          <div className="mx-auto w-full max-w-[1300px] px-5 md:px-0 mb-8 md:mb-12">
             <Reveal variant="mask" duration={950}>
               <OvalCard
                 src="/media/first-visit/first-visit-step-cypress.jpg"
