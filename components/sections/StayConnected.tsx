@@ -102,7 +102,7 @@ export default function StayConnected() {
           {/* TILE 3: Become a Member — masked image + 80% #0e0f14 overlay */}
           <div className="relative overflow-hidden rounded-[28px]" style={{ width: 420, height: 324 }}>
             <Image
-              src="/media/hero-poster.jpg"
+              src="/media/round-2/bayou/pixabay-bayou-swamp-285818.jpg"
               alt=""
               fill
               sizes="420px"
@@ -124,24 +124,93 @@ export default function StayConnected() {
           </div>
         </div>
 
-        {/* Mobile: stacked 1-per-row */}
-        <div className="md:hidden flex flex-col gap-4">
-          {[
-            { title: "Gift Card", bg: "/media/service-pages/essential-oils-step-blending.jpg", overlay: "bg-black/80", body: "Give the gift of an hour with Toya. Call or text (985) 278-6087." },
-            { title: "Newsletter", bg: null as string | null, overlay: "bg-ink-h2", body: "Occasional dispatches from the bayou. No spam." },
-            { title: "Become a Member", bg: "/media/hero-poster.jpg", overlay: "bg-overlay/80", body: "Returning clients since 2020. Ask Toya at your first visit." },
-          ].map((t) => (
-            <div key={t.title} className={`relative overflow-hidden rounded-[20px] h-[200px] ${t.bg ? "" : t.overlay}`}>
-              {t.bg && <Image src={t.bg} alt="" fill sizes="100vw" className="object-cover" />}
-              {t.bg && <div className={`absolute inset-0 ${t.overlay}`} />}
-              <h3 className="absolute font-clash text-white" style={{ left: 20, top: 16, fontSize: 22, fontWeight: 500 }}>
-                {t.title}
-              </h3>
-              <p className="absolute font-manrope text-white/80 pr-5" style={{ left: 20, top: 56, right: 20, fontSize: 13, lineHeight: "18px" }}>
-                {t.body}
-              </p>
+        {/* Mobile — R4.A optimized: Newsletter (the highest-value action) goes FIRST,
+            then Gift Card + Become-a-Member as horizontal-swipe pair below.
+            Skill applied:
+              - Newsletter form is action-first (gets prime real estate, full-width input
+                + filled mint submit button, both ≥48pt).
+              - Gift Card + Become-a-Member tiles are passive (information, not action);
+                horizontal swipe pair keeps them out of vertical scroll path.
+              - Each tile peek-of-next signals more content. */}
+        <div className="md:hidden">
+          {/* Newsletter — primary card, full-width, action first */}
+          <div className="relative overflow-hidden rounded-[20px] bg-ink-h2 p-6 mb-5">
+            <h3
+              className="font-clash text-white mb-2"
+              style={{ fontSize: 24, fontWeight: 500, letterSpacing: "0.2px" }}
+            >
+              Newsletter
+            </h3>
+            <p
+              className="font-manrope text-white/70 mb-5"
+              style={{ fontSize: 13, lineHeight: 1.5 }}
+            >
+              Occasional dispatches from the bayou. No spam, ever.
+            </p>
+            <form method="POST" action="/api/newsletter" className="flex flex-col gap-2.5">
+              <input
+                type="email"
+                name="email"
+                required
+                inputMode="email"
+                autoComplete="email"
+                aria-label="Email address"
+                placeholder="Your email"
+                className="block w-full bg-black px-4 font-clash text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-mint rounded-md"
+                style={{ fontSize: 16, height: 52, letterSpacing: "0.6px", border: "1px solid transparent" }}
+              />
+              <button
+                type="submit"
+                className="tap-press w-full bg-mint rounded-pill font-clash uppercase text-ink-body inline-flex items-center justify-center"
+                style={{ fontSize: 14, letterSpacing: "0.9px", fontWeight: 500, minHeight: 52 }}
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+
+          {/* Gift Card + Become Member — horizontal swipe pair */}
+          <div className="-mx-5">
+            <div className="scroll-snap-x gap-3 px-5">
+              {[
+                {
+                  title: "Gift Card",
+                  bg: "/media/service-pages/essential-oils-step-blending.jpg",
+                  overlay: "bg-black/75",
+                  body: "Give the gift of an hour with Toya — call or text (985) 278-6087 to arrange.",
+                  href: "tel:9852786087",
+                },
+                {
+                  title: "Become a Member",
+                  bg: "/media/round-2/bayou/pixabay-bayou-swamp-285818.jpg",
+                  overlay: "bg-overlay/75",
+                  body: "Returning clients since 2020. Ask Toya about ongoing care.",
+                  href: "/contact",
+                },
+              ].map((t) => (
+                <a
+                  key={t.title}
+                  href={t.href}
+                  className="scroll-snap-item tap-press relative block overflow-hidden rounded-[20px] h-[200px]"
+                  style={{ width: "78vw", maxWidth: 320 }}
+                >
+                  <Image src={t.bg} alt="" fill sizes="78vw" className="object-cover" />
+                  <div className={`absolute inset-0 ${t.overlay}`} />
+                  <div className="absolute inset-x-0 bottom-0 p-5">
+                    <h3 className="font-clash text-white mb-2" style={{ fontSize: 22, fontWeight: 500 }}>
+                      {t.title}
+                    </h3>
+                    <p
+                      className="font-manrope text-white/80"
+                      style={{ fontSize: 12, lineHeight: 1.5 }}
+                    >
+                      {t.body}
+                    </p>
+                  </div>
+                </a>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>

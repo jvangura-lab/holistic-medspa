@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { HTMLAttributes } from "react";
 
 /**
  * Schedule a Session — Figma 125:295 wrapper (sections-mid-NEW.tsx §5).
@@ -132,9 +133,77 @@ export default function ScheduleSession() {
           </div>
         </div>
 
-        {/* Mobile: stacked layout */}
+        {/* Mobile — R4.A optimized: form FIRST (action-first per skill — let user act
+            before scrolling past), image collapsed into a small visual anchor below.
+            Skill applied:
+              - Inputs use natural-flow labels above (clearer than overlay) + 16px text
+                (Apple no-zoom rule) + 56px field height (≥44pt tap target).
+              - bg-cream + 2px focus ring (mint) for clear interaction state.
+              - inputmode hints surface the right mobile keyboard per field type.
+              - Submit pill is full-width + 56pt height + filled mint (highest affordance).
+              - The trust photo lives BELOW the form as supporting context, not above
+                gating the action. */}
         <div className="md:hidden">
-          <div className="relative w-full h-[280px] mb-8 overflow-hidden">
+          <form method="POST" action="/book?source=home" className="space-y-3.5">
+            {[
+              { id: "name", label: "Your name", type: "text", inputMode: "text", autoComplete: "name", required: true },
+              { id: "email", label: "Email", type: "email", inputMode: "email", autoComplete: "email", required: true },
+              { id: "phone", label: "Phone", type: "tel", inputMode: "tel", autoComplete: "tel", required: true },
+              { id: "date", label: "Preferred date or window", type: "text", inputMode: "text", autoComplete: "off", required: false },
+            ].map((f) => (
+              <div key={f.id}>
+                <label
+                  htmlFor={`mschedule-${f.id}`}
+                  className="block font-manrope uppercase text-ink-body mb-2"
+                  style={{ fontSize: 12, letterSpacing: "0.9px", fontWeight: 500 }}
+                >
+                  {f.label}
+                </label>
+                <input
+                  id={`mschedule-${f.id}`}
+                  name={f.id}
+                  type={f.type}
+                  inputMode={f.inputMode as HTMLAttributes<HTMLInputElement>["inputMode"]}
+                  autoComplete={f.autoComplete}
+                  required={f.required}
+                  className="block w-full bg-cream font-manrope text-ink-deep focus:outline-none focus:ring-2 focus:ring-mint focus:ring-offset-0 px-4"
+                  style={{ fontSize: 16, height: 56, border: "1px solid transparent" }}
+                />
+              </div>
+            ))}
+            <div>
+              <label
+                htmlFor="mschedule-message"
+                className="block font-manrope uppercase text-ink-body mb-2"
+                style={{ fontSize: 12, letterSpacing: "0.9px", fontWeight: 500 }}
+              >
+                Message <span className="text-ink-body/60 normal-case">(optional)</span>
+              </label>
+              <textarea
+                id="mschedule-message"
+                name="message"
+                rows={4}
+                className="block w-full bg-cream font-manrope text-ink-deep resize-none focus:outline-none focus:ring-2 focus:ring-mint px-4 py-3"
+                style={{ fontSize: 16, border: "1px solid transparent" }}
+              />
+            </div>
+            <button
+              type="submit"
+              className="tap-press w-full bg-mint rounded-pill font-clash uppercase text-black inline-flex items-center justify-center mt-2"
+              style={{ fontSize: 15, letterSpacing: "0.9px", fontWeight: 500, minHeight: 56 }}
+            >
+              Book an Appointment
+            </button>
+            <a
+              href="tel:9852786087"
+              className="tap-press block text-center font-clash uppercase text-ink-body/70 mt-1"
+              style={{ fontSize: 12, letterSpacing: "0.8px", fontWeight: 500, minHeight: 44, lineHeight: "44px" }}
+            >
+              Or call (985) 278-6087
+            </a>
+          </form>
+          {/* Image becomes a trust anchor BELOW the form — smaller, no longer blocks action */}
+          <div className="relative w-full h-[200px] mt-10 overflow-hidden rounded-[20px]">
             <Image
               src="/media/round-2/apothecary/pexels-classic-apothecary-jars-wooden-shelf-30175087.jpg"
               alt="Classic apothecary jars lined up on a wooden shelf in dim warm light."
@@ -143,55 +212,6 @@ export default function ScheduleSession() {
               className="object-cover"
             />
           </div>
-          <form method="POST" action="/book?source=home" className="space-y-4">
-            {[
-              { id: "name", label: "Name", type: "text", required: true },
-              { id: "email", label: "Email", type: "email", required: true },
-              { id: "phone", label: "Phone", type: "tel", required: true },
-              { id: "date", label: "Date", type: "text", required: false },
-            ].map((f) => (
-              <div key={f.id} className="bg-cream relative h-[64px]">
-                <label
-                  htmlFor={`mschedule-${f.id}`}
-                  className="absolute font-manrope uppercase text-ink-body pointer-events-none"
-                  style={{ left: 20, top: 20, fontSize: 14, letterSpacing: "0.7px" }}
-                >
-                  {f.label}
-                </label>
-                <input
-                  id={`mschedule-${f.id}`}
-                  name={f.id}
-                  type={f.type}
-                  required={f.required}
-                  className="absolute inset-0 w-full h-full bg-transparent pt-7 px-5 font-manrope text-ink-deep focus:outline-none"
-                  style={{ fontSize: 16 }}
-                />
-              </div>
-            ))}
-            <div className="bg-cream relative h-[140px]">
-              <label
-                htmlFor="mschedule-message"
-                className="absolute font-manrope uppercase text-ink-body pointer-events-none"
-                style={{ left: 20, top: 20, fontSize: 14, letterSpacing: "0.7px" }}
-              >
-                Message
-              </label>
-              <textarea
-                id="mschedule-message"
-                name="message"
-                rows={4}
-                className="absolute inset-0 w-full h-full bg-transparent pt-9 px-5 font-manrope text-ink-deep resize-none focus:outline-none"
-                style={{ fontSize: 16 }}
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-mint rounded-pill font-clash uppercase text-black h-[56px]"
-              style={{ fontSize: 16, letterSpacing: "0.8px" }}
-            >
-              Book an Appointment
-            </button>
-          </form>
         </div>
       </div>
     </section>
