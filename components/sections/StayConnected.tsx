@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Reveal from "@/components/motion/Reveal";
 import SplitText from "@/components/motion/SplitText";
 
 /**
@@ -38,7 +37,7 @@ export default function StayConnected() {
         {/* Desktop: 3-tile row at 1300 container width, ~420w each + gaps */}
         <div className="hidden md:flex justify-center gap-[20px]">
           {/* TILE 1: Gift Card — masked image + 80% black overlay */}
-          <Reveal variant="mask" duration={900} className="relative overflow-hidden rounded-[28px]" style={{ width: 420, height: 324 }}>
+          <div className="relative overflow-hidden rounded-[28px]" style={{ width: 420, height: 324 }}>
             <Image
               src="/media/service-pages/essential-oils-step-blending.jpg"
               alt=""
@@ -59,10 +58,10 @@ export default function StayConnected() {
             >
               Give the gift of an hour with Toya — a ZYTO scan, a Milly&apos;s Minutes session, or a Bach Flower consult. Call or text (985) 278-6087 to arrange.
             </p>
-          </Reveal>
+          </div>
 
           {/* TILE 2: Newsletter — bg #231f20 dark + email input + submit pill */}
-          <Reveal variant="mask" delay={180} duration={900} className="relative overflow-hidden rounded-[28px] bg-ink-h2" style={{ width: 420, height: 324 }}>
+          <div className="relative overflow-hidden rounded-[28px] bg-ink-h2" style={{ width: 420, height: 324 }}>
             <h3
               className="absolute font-clash text-white"
               style={{ left: 30, top: 20, fontSize: 31, fontWeight: 500, letterSpacing: 0 }}
@@ -98,10 +97,10 @@ export default function StayConnected() {
             >
               Occasional dispatches from the bayou. No spam, ever.
             </p>
-          </Reveal>
+          </div>
 
           {/* TILE 3: Become a Member — masked image + 80% #0e0f14 overlay */}
-          <Reveal variant="mask" delay={360} duration={900} className="relative overflow-hidden rounded-[28px]" style={{ width: 420, height: 324 }}>
+          <div className="relative overflow-hidden rounded-[28px]" style={{ width: 420, height: 324 }}>
             <Image
               src="/media/hero-poster.jpg"
               alt=""
@@ -122,7 +121,7 @@ export default function StayConnected() {
             >
               Returning clients across Bayou Lafourche have kept coming back since 2020. Ask Toya about ongoing care at your first visit.
             </p>
-          </Reveal>
+          </div>
         </div>
 
         {/* Mobile: stacked 1-per-row */}
